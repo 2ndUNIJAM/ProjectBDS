@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dg3wys5rgisqh"]
+
+[ext_resource type="Script" path="res://tile_factory/TileFactory.cs" id="1_6ah4l"]
+
+[node name="TileFactory" type="Node"]
+script = ExtResource("1_6ah4l")

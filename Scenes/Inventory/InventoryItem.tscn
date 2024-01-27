@@ -24,6 +24,10 @@ size_flags_vertical = 4
 script = ExtResource("1_kcqja")
 NodeAtlasTexture = ExtResource("2_vkjig")
 
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(533, 533)
+layout_mode = 2
+
 [node name="Left" type="TextureRect" parent="."]
 layout_mode = 2
 texture = ExtResource("2_nndsy")

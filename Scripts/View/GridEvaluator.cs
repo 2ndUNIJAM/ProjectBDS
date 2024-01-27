@@ -19,8 +19,8 @@ public partial class GridEvaluator : Node
 		{
 			for(int j = 0; j<grid.Tiles[i].Count; j++)
 			{
-				GD.Print("가로줄: "+grid.Tiles.Count);
-				GD.Print("세로줄: "+grid.Tiles[i].Count);
+				GD.Print("세로줄: "+grid.Tiles.Count);
+				GD.Print("가로줄: "+grid.Tiles[i].Count);
 
 				if (grid.Tiles[i][j] == null) //현재 좌표에 타일이 놓여있을 경우
 				{
@@ -50,9 +50,11 @@ public partial class GridEvaluator : Node
 
 	public int EvaluateScore(Grid grid) //콤보체킹함수
 	{
+		int width = grid.Tiles[0].Count;
+		int height = grid.Tiles.Count;
 		List<List<Vector2I>> comboList = new List<List<Vector2I>>();
-		List<List<bool>> isNodeChecked = new List<List<bool>>(); // 체크 여부
-		
+		//List<List<bool>> isNodeChecked = new List<List<bool>>(); // 체크 여부
+		bool[,] isNodeChecked = new bool[height,width];
 		int curComboGroup = 0; // 현재 몇 번째 콤보그룹 확인 중인가?
 		comboList.Add(new List<Vector2I>());
 
@@ -60,10 +62,12 @@ public partial class GridEvaluator : Node
 
 		for (int i=0; i<grid.Tiles.Count; i++)
 		{
-			isNodeChecked.Add(new List<bool>());
+			//isNodeChecked.Add(new List<bool>());
 			for(int j=0; j < grid.Tiles[i].Count; j++)
 			{
-				isNodeChecked[i].Add(false);
+				//isNodeChecked[i].Add(false);
+				isNodeChecked[i,j] = false;
+
 			}
 		}
 
@@ -73,41 +77,52 @@ public partial class GridEvaluator : Node
 			{
 				for (int j = 0; j < grid.Tiles[i].Count; j++)
 				{
-					if (isNodeChecked[i][j]) continue;
-					isNodeChecked[i][j] = true;
+					if (isNodeChecked[i,j]) continue;
+					isNodeChecked[i,j] = true;
 
 					List<Vector2I> newCombo = new List<Vector2I>();
-					newCombo = EvaluateEdgeForCombo(grid, new Vector2I(i, j)); // 새로 조사해 온 배열
-					for (int k = 0; k < newCombo.Count; k++)
+					newCombo = BFS(j,i,grid,ref isNodeChecked); // 새로 조사해 온 배열
+					//if (comboList[curComboGroup].Contains(newCombo[k])) { newCombo.Remove(newCombo[k]); } //중복은 지워주고
+					for (int l = 0; l < newCombo.Count; l++)
 					{
-						if (comboList[curComboGroup].Contains(newCombo[k])) { newCombo.Remove(newCombo[k]); } //중복은 지워주고
-						if (newCombo == null)  //더 이상 새로 콤보 추가할 후보가 없다면..
+						GD.Print(newCombo[l].X + " " + newCombo[l].Y);
+					}
+					GD.Print("");
+					
+					if (newCombo.Count<=1)  //더 이상 새로 콤보 추가할 후보가 없다면..
+					{
+						curComboGroup++; // 다음콤보 체킹으로 넘어가기
+						comboList.Add(new List<Vector2I>()); // 다음콤보 리스트 미리 만들어두기
+						break;
+					}
+					else
+					{
+						for (int l = 0; l < newCombo.Count; l++)
 						{
-							curComboGroup++; // 다음콤보 체킹으로 넘어가기
-							comboList.Add(new List<Vector2I>()); // 다음콤보 리스트 미리 만들어두기
-							break;
+							GD.Print(newCombo[l].X + " " + newCombo[l].Y);
+							comboList[curComboGroup].Add(newCombo[l]); //추가된 콤보를 확정 배열로 집어넣기
+							isNodeChecked[newCombo[l].Y, newCombo[l].X] = true; //체킹 true로 설정
 						}
-						else
-						{
-							for (int l = 0; l < newCombo.Count; l++)
-							{
-								comboList[curComboGroup].Add(newCombo[l]); //추가된 콤보를 확정 배열로 집어넣기
-								isNodeChecked[newCombo[l].X][newCombo[l].Y] = true; //체킹 true로 설정
-							}
-
-						}
-
+						GD.Print("");
 					}
 				}
 			}
-
-			for(int i = 0; i < isNodeChecked.Count; i++)
+			for(int i = 0; i < height; i++)
 			{
-				if (isNodeChecked[i].Contains(false)) break;
-				isFinishedChecking = true;
+				bool check = false;
+				for (int j = 0; j < width; j++)
+				{
+					if (!isNodeChecked[i, j])
+					{
+						check = true;
+						break;
+					}
+					isFinishedChecking = true;
+				}
+				if (check) break;
 			}
 		} while (!isFinishedChecking);
-
+		GD.Print(curComboGroup);
 		int FinalScore = 500;
 
 		return FinalScore;
@@ -171,4 +186,65 @@ public partial class GridEvaluator : Node
 		
 	}
 
+	List<Vector2I> BFS(int x, int y, Grid grid, ref bool[,] isVisited)
+	{
+		//GD.Print("From " + x + ", " + y);
+		List<Vector2I> ComboList = new List<Vector2I>();
+		
+		int[] dx = { 0, 0, -1, 1 };
+		int[] dy = { -1, 1, 0, 0 };
+		
+		int width = grid.Tiles[0].Count, height = grid.Tiles.Count;
+
+		Queue<Vector2I> q = new Queue<Vector2I>();
+		q.Enqueue(new Vector2I(x, y));
+        isVisited[y,x] = true;
+		ComboList.Add(new Vector2I(x, y));
+		while(q.Count > 0)
+		{
+            Vector2I tuple;
+			q.TryDequeue(out tuple);
+            Tile curTile = grid.Tiles[tuple.Y][tuple.X];
+            for (int i=0; i<4; i++)
+			{
+                bool check = false;
+                int nx = tuple.X + dx[i];
+				int ny = tuple.Y + dy[i];
+				if(nx>=0 && ny>=0 && nx<width && ny<height && !isVisited[ny,nx])
+				{
+                    if (i == 0) {
+                        if(curTile.North == grid.Tiles[ny][nx].South && curTile.Node == grid.Tiles[ny][nx].Node)
+							check = true;
+                    }
+					else if (i == 1)
+					{
+                        if (curTile.South == grid.Tiles[ny][nx].North && curTile.Node == grid.Tiles[ny][nx].Node)
+                            check = true;
+                    }
+					else if (i == 2)
+					{
+						if (curTile.West == grid.Tiles[ny][nx].East && curTile.Node == grid.Tiles[ny][nx].Node)
+							check = true;
+                    }
+					else if (i == 3)
+					{
+						if (curTile.East == grid.Tiles[ny][nx].West && curTile.Node == grid.Tiles[ny][nx].Node)
+							check = true;
+                    }
+
+					if (check)
+					{
+                        //GD.PrintT(nx + " " + ny);
+                        //GD.Print(curTile.East + " " + curTile.West + " " + curTile.South + " " + curTile.North);
+                        isVisited[ny, nx] = true;
+						ComboList.Add(new Vector2I(nx, ny));
+                        q.Enqueue(new Vector2I(x, y));
+						break;
+					}
+                }
+			}
+		}
+        return ComboList;
+    }
 }
+

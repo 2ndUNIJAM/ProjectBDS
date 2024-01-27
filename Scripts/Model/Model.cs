@@ -56,12 +56,12 @@ public class Grid
 
     public Grid()
     {
-        Tiles = new List<List<Tile>>();
+        Tiles = new List<List<Tile>>(10); 
     }
     public Grid(int width, int height)
     {
         //GD.Print("Grid Constructor");
-        Tiles = new List<List<Tile>>();
+        Tiles = new List<List<Tile>>(height);
     }
 }
 

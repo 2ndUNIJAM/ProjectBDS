@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://sy6450aix58r"]
+
+[ext_resource type="Script" path="res://Scripts/View/GridEvaluator.cs" id="1_yqob2"]
+[ext_resource type="Script" path="res://Scenes/Tester.cs" id="2_tguyv"]
+
+[node name="TestGridEvaluator" type="Node2D"]
+
+[node name="GridEvaluator" type="Node2D" parent="."]
+position = Vector2(4, -2)
+script = ExtResource("1_yqob2")
+
+[node name="Tester" type="Node2D" parent="."]
+script = ExtResource("2_tguyv")

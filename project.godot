@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="ProjectBDS"
-run/main_scene="res://Scenes/Test_Hongsong.tscn"
+run/main_scene="res://Scenes/test_juyeon.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 

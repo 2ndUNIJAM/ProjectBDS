@@ -5,8 +5,8 @@ public partial class World : Node
 {
 	[Export]
 	TileMap tile_map = null;
-    [Export]
-    int ground_layer = 0;
+	[Export]
+	int ground_layer = 0;
 	[Export]
 	int tile_source_id = 0;
 	[Export]
@@ -36,8 +36,8 @@ public partial class World : Node
 			if (eventMouseButton.ButtonIndex == MouseButton.Left)
 			{
 				GD.Print("Left Clicked");
-                //ClearTileMap(tile_map);
-                SetTileInTileMap(tile_map);
+				//ClearTileMap(tile_map);
+				SetTileInTileMap(tile_map);
 			}
 			else if (eventMouseButton.ButtonIndex == MouseButton.Right)
 			{
@@ -58,8 +58,8 @@ public partial class World : Node
 
 	public void ClearTileMap(TileMap tile_map)
 	{
-        if (tile_map == null) return;
-        tile_map.Clear();
+		if (tile_map == null) return;
+		tile_map.Clear();
 		GD.Print("Map Cleared");
 	}
 
@@ -72,8 +72,8 @@ public partial class World : Node
 
 	public void EraseTileInTileMap(TileMap tile_map)
 	{
-        if (tile_map == null) return;
-        tile_map.EraseCell(ground_layer, cur_tile_Pos);
+		if (tile_map == null) return;
+		tile_map.EraseCell(ground_layer, cur_tile_Pos);
 		GD.Print("Erase Tile");
 	}
 

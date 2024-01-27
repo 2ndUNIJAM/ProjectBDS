@@ -43,7 +43,11 @@ public partial class TileHandler : GodotObject
             }
             grid.Tiles[swappedY][swappedX] = inventoryTile;
             inventory.Tiles.Remove(inventoryTile);
-            if (tempTile == null) return;
+            if (tempTile == null)
+            {
+                grab.InventoryGrab = -1;
+                return;
+            }
             inventory.Tiles.AddLast(tempTile);
         }
         else if(grab.GridGrab.Count>0)
@@ -72,6 +76,12 @@ public partial class TileHandler : GodotObject
         // Place tile one by one
         int placedX = target.X;
         int placedY = target.Y;
+
+        // Check is out of range
+
+        if (placedY < 0 || placedY > grid.Tiles.Count ||
+            placedX < 0 || placedX > grid.Tiles[0].Count) return;
+
         // if tiles are from the inventory
         if (grab.InventoryGrab >= 0)
         {

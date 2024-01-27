@@ -57,10 +57,10 @@ public class Grid
     public Grid()
     {
         Tiles = new List<List<Tile>>();
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < 100; i++)
         {
             Tiles.Add(new List<Tile>());
-            for (int j = 0; j < 1; j++)
+            for (int j = 0; j < 100; j++)
             {
                 Tiles[i].Add(null);
             }

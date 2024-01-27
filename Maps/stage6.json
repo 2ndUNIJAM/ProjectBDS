@@ -1,0 +1,87 @@
+{
+    "width": 5,
+    "height": 4,
+    "tiles": [
+        {
+            "node": 1,
+            "road": ["n"]
+        },
+        {
+            "node": 1,
+            "road": ["n"]
+        },
+        {
+            "node": 1,
+            "road": ["w", "n"]
+        },
+        {
+            "node": 1,
+            "road": ["n", "e"]
+        },
+        {
+            "node": 1,
+            "road": ["n","e","s"]
+        },
+        {
+            "node": 1,
+            "road": ["w","e","s"]
+        },
+        {
+            "node": 1,
+            "road": ["w", "n", "e"]
+        },
+        {
+            "node": 2,
+            "road": ["e"]
+        },
+        {
+            "node": 2,
+            "road": ["s"]
+        },
+        {
+            "node": 2,
+            "road": ["w","e"]
+        },
+        {
+            "node": 2,
+            "road": ["w", "s"]
+        },
+        {
+            "node": 2,
+            "road": ["w", "e", "s", "n"]
+        },
+        {
+            "node": 3,
+            "road": ["s"]
+        },
+        {
+            "node": 3,
+            "road": ["s"]
+        },
+        {
+            "node": 3,
+            "road": ["e"]
+        },
+        {
+            "node": 3,
+            "road": ["n", "s"]
+        },
+        {
+            "node": 3,
+            "road": ["w", "e"]
+        },
+        {
+            "node": 3,
+            "road": ["n", "w", "s"]
+        },
+        {
+            "node": 3,
+            "road": ["n", "w", "s"]
+        },
+        {
+            "node": 3,
+            "road": ["n", "w", "s", "e"]
+        },
+
+    ]
+}

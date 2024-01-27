@@ -1,0 +1,30 @@
+{
+    "width": 3,
+    "height": 2,
+    "tiles": [
+        {
+            "node": 1,
+            "road": ["e", "s"]
+        },
+        {
+            "node": 1,
+            "road": ["w", "s"]
+        },
+        {
+            "node": 1,
+            "road": ["w", "e", "s"]
+        },
+        {
+            "node": 2, 
+            "road": ["n", "e"]
+        },
+        {
+            "node": 2,
+            "road": ["n", "w"]
+        },
+        {
+            "node": 2,
+            "road": ["n", "w", "e"]
+        }
+    ]
+}

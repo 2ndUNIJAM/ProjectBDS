@@ -23,6 +23,7 @@ public class Tile
     public EdgeType North;
     public NodeType Node;
 
+    public int tile_layer;
     public int source_id;
     public Vector2I atlas_coord;
 
@@ -34,6 +35,7 @@ public class Tile
         North = EdgeType.DisConnected;
         Node = NodeType.NodeType1;
 
+        tile_layer = 0;
         source_id = 0;
         atlas_coord = Vector2I.Zero;
     }
@@ -66,6 +68,7 @@ public class Grid
     }
     public Grid(int width, int height)
     {
+        //GD.Print("Grid Constructor");
         Tiles = new List<List<Tile>>();
         for (int i = 0; i < height; i++)
         {

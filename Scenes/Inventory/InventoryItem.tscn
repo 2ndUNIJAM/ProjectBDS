@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://dpwwt0mkfaye"]
+
+[ext_resource type="Texture2D" uid="uid://bsf14vd5a71pu" path="res://Sprites/spr_roadTest.png" id="1_1xfk1"]
+[ext_resource type="Script" path="res://Scenes/Inventory/InventoryItem.cs" id="1_kcqja"]
+[ext_resource type="Texture2D" uid="uid://cfjwae2fvhrhc" path="res://Sprites/TestRoadAtlas/TestRight.tres" id="2_iw5qh"]
+[ext_resource type="Texture2D" uid="uid://porcgexh8g2l" path="res://Sprites/TestRoadAtlas/TestLeft.tres" id="2_nndsy"]
+[ext_resource type="Texture2D" uid="uid://dwcur2is6m865" path="res://Sprites/spr_bulidings.png" id="2_vkjig"]
+[ext_resource type="Texture2D" uid="uid://dgifxdrjkp5x6" path="res://Sprites/TestRoadAtlas/TestUp.tres" id="3_0gi0q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8i0sc"]
+atlas = ExtResource("1_1xfk1")
+region = Rect2(533, 1066, 533, 533)
+
+[node name="InventoryItem" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kcqja")
+NodeAtlasTexture = ExtResource("2_vkjig")
+
+[node name="Left" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_nndsy")
+
+[node name="Right" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_iw5qh")
+
+[node name="Down" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("AtlasTexture_8i0sc")
+
+[node name="Up" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_0gi0q")
+
+[node name="Node" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

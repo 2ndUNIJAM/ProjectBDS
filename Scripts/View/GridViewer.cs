@@ -3,41 +3,9 @@ using System;
 
 public partial class GridViewer : TileMap
 {
-	[Export]
-
-	Vector2I curTilePos;
-
     int road_source_id = 2;
     int[] road_layer = { 2, 3, 4, 5 };
     Vector2I[] road_atlas_coords = { new Vector2I(0, 0), new Vector2I(1, 0), new Vector2I(0, 1), new Vector2I(1, 1) };
-
-	//State state;
-
-    public override void _Ready()
-	{
-		// State가 있다 가정
-		// state = GetNode<State>("../State");
-	}
-
-	public override void _Process(double delta)
-	{
-		curTilePos = GetTilePos();
-	}
-
-	public override void _Input(InputEvent @event)
-	{
-		if (@event is InputEventMouseButton eventMouseButton)
-		{
-			if (!eventMouseButton.Pressed) return;
-
-			if (eventMouseButton.ButtonIndex == MouseButton.Left || 
-				eventMouseButton.ButtonIndex == MouseButton.Right)
-			{
-				// state가 있다 가정
-				//UpdateGridView(state.grid, curTilePos);
-			}
-		}
-	}
 
 	public void UpdateGridView(State state, Vector2I updatedPoint)
 	{
@@ -55,16 +23,17 @@ public partial class GridViewer : TileMap
 			for (int j = 0; j < grid.Tiles[i].Count; j++)
 			{
 				Tile tile = grid.Tiles[i][j];
+				Vector2I newPos = new Vector2I(j, i);
 				if (tile == null)
 				{
 					for (int k = 0; k < GetLayersCount(); k++)
 					{
-						EraseTileInTileMap(k, new Vector2I(j, i));
+						EraseTileInTileMap(k, newPos);
 					}
 					continue;
 				}
-                PlaceRoad(grid,new Vector2I(j,i));
-                SetTileInTileMap(tile.tile_layer, new Vector2I(j, i), tile.source_id, tile.atlas_coord);
+                PlaceRoad(grid, new Vector2I(j, i));
+                SetTileInTileMap(tile.tile_layer, newPos, tile.source_id, tile.atlas_coord);
 				GD.Print(tile.atlas_coord);
 			}
 		}
@@ -100,7 +69,8 @@ public partial class GridViewer : TileMap
     public Vector2I GetTilePos()
 	{
 		Vector2 mouse_pos = GetLocalMousePosition();
-		return this.LocalToMap(mouse_pos);
+		Vector2I map_pos = LocalToMap(mouse_pos);
+		return map_pos;
 	}
 
 }

@@ -99,7 +99,7 @@ public partial class Tester : Node
         testGrid.Tiles[3].Add(tile8);
         testGrid.Tiles[3].Add(tile10);
 
-        //¢¯
+        //ï¿½ï¿½
 
 	}
 

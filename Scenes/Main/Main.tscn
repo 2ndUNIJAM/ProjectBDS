@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bmu0yx4fvuqpk"]
+[gd_scene load_steps=8 format=3 uid="uid://bmu0yx4fvuqpk"]
 
 [ext_resource type="PackedScene" uid="uid://bv12jevebwfge" path="res://Scenes/Main/Map.tscn" id="1_2mq06"]
 [ext_resource type="Script" path="res://Scenes/Main/State.cs" id="2_b6ynt"]
@@ -6,19 +6,20 @@
 [ext_resource type="PackedScene" uid="uid://cvklbwqdgptht" path="res://Scenes/Input/Input.tscn" id="4_ww7tm"]
 [ext_resource type="PackedScene" uid="uid://duhffdexnc71q" path="res://Scenes/Inventory/Inventory.tscn" id="5_66ouf"]
 [ext_resource type="Script" path="res://Scripts/View/GridEvaluator.cs" id="6_pp8jg"]
+[ext_resource type="Texture2D" uid="uid://d0e64kib72ive" path="res://Sprites/bg_main.png" id="7_sk7yl"]
 
 [node name="Main" type="Node2D"]
 
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(812, 360)
+texture = ExtResource("7_sk7yl")
+
 [node name="TileMap" parent="." instance=ExtResource("1_2mq06")]
-position = Vector2(4.74, 0)
-layer_2/z_index = -1
-layer_3/z_index = -1
-layer_4/z_index = -1
-layer_5/z_index = -1
+position = Vector2(512, 128)
+layer_1/z_index = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(1150, 650)
-zoom = Vector2(0.5, 0.5)
+position = Vector2(640, 360)
 
 [node name="State" type="Node" parent="."]
 script = ExtResource("2_b6ynt")

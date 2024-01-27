@@ -1,7 +1,22 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://lf24lae0wu1r"]
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://lf24lae0wu1r"]
 
+[ext_resource type="Texture2D" uid="uid://blualmtvjd4lc" path="res://Sprites/spr_streched_buliding.png" id="1_vcj0k"]
 [ext_resource type="Texture2D" uid="uid://bx2mn2n323xru" path="res://Sprites/building.png" id="2_yl47a"]
 [ext_resource type="Texture2D" uid="uid://cfve48i0hbs71" path="res://Sprites/road.png" id="3_ivt5a"]
+[ext_resource type="Texture2D" uid="uid://bx3jtajn5qnfl" path="res://Sprites/spr_road_streched.png" id="3_qdabf"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lulhr"]
+texture = ExtResource("1_vcj0k")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+1:0/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+2:2/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lhmut"]
 texture = ExtResource("2_yl47a")
@@ -16,6 +31,14 @@ texture_region_size = Vector2i(512, 512)
 1:2/0 = 0
 2:2/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nsq1r"]
+texture = ExtResource("3_qdabf")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5qou1"]
 texture = ExtResource("3_ivt5a")
 texture_region_size = Vector2i(512, 512)
@@ -25,6 +48,8 @@ texture_region_size = Vector2i(512, 512)
 1:1/0 = 0
 
 [resource]
-tile_size = Vector2i(512, 512)
-sources/1 = SubResource("TileSetAtlasSource_lhmut")
-sources/2 = SubResource("TileSetAtlasSource_5qou1")
+tile_size = Vector2i(128, 128)
+sources/12 = SubResource("TileSetAtlasSource_lhmut")
+sources/1 = SubResource("TileSetAtlasSource_lulhr")
+sources/5 = SubResource("TileSetAtlasSource_5qou1")
+sources/2 = SubResource("TileSetAtlasSource_nsq1r")

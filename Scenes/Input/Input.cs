@@ -25,9 +25,9 @@ public partial class Input : Node
 
 	public override void _Process(double delta)
 	{
-/*		GD.Print($"{GetViewport().GetMousePosition()}");
+		//GD.Print($"{GetViewport().GetMousePosition()}");
 		
-		GD.Print(viewer.GetTilePos());*/
+		//GD.Print($"{viewer.GetTilePos()}");
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
@@ -38,7 +38,8 @@ public partial class Input : Node
 			if (eventMouseButton.ButtonIndex == MouseButton.Left)
 			{
 				EmitSignal(SignalName.OnGrabGrid,viewer.GetTilePos());
-			}
+                GD.Print($"{viewer.GetTilePos()}");
+            }
 
 			if (eventMouseButton.ButtonIndex == MouseButton.Right)
 			{

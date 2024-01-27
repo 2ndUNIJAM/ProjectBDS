@@ -17,7 +17,9 @@ public partial class State : Node
 		Inventory = new Inventory();
 		Grab = new Grab();
 		Grid = new Grid();
-		TileHandler.PopulateMapWithJson(Grid, Inventory, JsonMapPath);
+		SceneManager sceneManager = GetNode("/root/SceneManager") as SceneManager;
+		if (sceneManager != null )
+		TileHandler.PopulateMapWithJson(Grid, Inventory, sceneManager.MapPath);
 	}
 
 }

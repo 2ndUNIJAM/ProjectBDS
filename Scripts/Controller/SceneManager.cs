@@ -14,7 +14,14 @@ public partial class SceneManager : Node
 
 	string _MapPath;
 
-	public string MapPath { get =>_MapPath;  }
+	public string MapPath { get =>_MapPath; }
+
+	public void LoadStage1() => LoadStage(0);
+	public void LoadStage2() => LoadStage(1);
+	public void LoadStage3() => LoadStage(2);
+	public void LoadStage4() => LoadStage(3);
+	public void LoadStage5() => LoadStage(4);
+	public void LoadStage6() => LoadStage(5);
 
 	public void LoadStage(int stage)
 	{

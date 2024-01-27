@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cf2gfth6x6hfg"]
+[gd_scene load_steps=4 format=3 uid="uid://cf2gfth6x6hfg"]
 
 [ext_resource type="Script" path="res://Scripts/Controller/SceneManager.cs" id="1_67e8g"]
 [ext_resource type="PackedScene" uid="uid://257u5fcoumtk" path="res://Scenes/StageSelect/StageSelect.tscn" id="2_ej2v3"]
+[ext_resource type="PackedScene" uid="uid://bmu0yx4fvuqpk" path="res://Scenes/Main/Main.tscn" id="3_jvrf0"]
 
 [node name="SceneManager" type="Node"]
 script = ExtResource("1_67e8g")
 StageSelectScene = ExtResource("2_ej2v3")
+MainScene = ExtResource("3_jvrf0")
 MapPaths = PackedStringArray("res://Maps/stage1.json", "res://Maps/stage2.json", "res://Maps/stage3.json", "res://Maps/stage4.json", "res://Maps/stage5.json", "res://Maps/stage6.json")

@@ -20,7 +20,7 @@ public partial class World : Node
 		//tile_map = GetNode<TileMap>($"../TileMap");
 		if (tile_map!=null)
 		{
-			GD.Print("Tile map found");
+			//GD.Print("Tile map found");
 		}
 	}
 
@@ -35,13 +35,13 @@ public partial class World : Node
 		{
 			if (eventMouseButton.ButtonIndex == MouseButton.Left)
 			{
-				GD.Print("Left Clicked");
+				//GD.Print("Left Clicked");
                 //ClearTileMap(tile_map);
                 SetTileInTileMap(tile_map);
 			}
 			else if (eventMouseButton.ButtonIndex == MouseButton.Right)
 			{
-				GD.Print("Right Clicked");
+				//GD.Print("Right Clicked");
 				EraseTileInTileMap(tile_map);
 			}
 
@@ -67,14 +67,14 @@ public partial class World : Node
 	{
 		if (tile_map == null) return;
 		tile_map.SetCell(ground_layer, cur_tile_Pos, tile_source_id, tile_atlas_coord);
-		GD.Print("Set Tile");
+		//GD.Print("Set Tile");
 	}
 
 	public void EraseTileInTileMap(TileMap tile_map)
 	{
         if (tile_map == null) return;
         tile_map.EraseCell(ground_layer, cur_tile_Pos);
-		GD.Print("Erase Tile");
+		//GD.Print("Erase Tile");
 	}
 
 	public override void _UnhandledInput(InputEvent @event)

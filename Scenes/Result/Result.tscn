@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bsynjat4p2v62"]
+[gd_scene load_steps=16 format=3 uid="uid://bsynjat4p2v62"]
 
 [ext_resource type="Script" path="res://Scenes/Result/ResultPage.cs" id="1_60ivo"]
 [ext_resource type="Texture2D" uid="uid://nory1gdadwsg" path="res://Scenes/Result/major_2-Sheet.png" id="1_lttq5"]
@@ -7,25 +7,35 @@
 [ext_resource type="Texture2D" uid="uid://2sv1l0l6nh4u" path="res://Scenes/Result/spr_stamp2.png" id="3_swugb"]
 [ext_resource type="Texture2D" uid="uid://b831jdnxxm040" path="res://Scenes/Result/spr_stamp3.png" id="4_bodax"]
 [ext_resource type="Texture2D" uid="uid://dbsl6hh4nv7li" path="res://Scenes/Result/spr_stamp4.png" id="5_jsvin"]
+[ext_resource type="Texture2D" uid="uid://5oldluk017im" path="res://Scenes/Result/play_button_2.png" id="8_mjuv5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xepmc"]
 atlas = ExtResource("1_lttq5")
 region = Rect2(0, 0, 1280, 1280)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ddooa"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_st6hf"]
 atlas = ExtResource("2_en1fj")
 region = Rect2(0, 0, 100, 100)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i2qta"]
-bg_color = Color(0, 0, 0, 0)
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4p8c"]
+atlas = ExtResource("8_mjuv5")
+region = Rect2(0, 0, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_o3xn1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_sksbt"]
 atlas = ExtResource("2_en1fj")
 region = Rect2(100, 0, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_j8e36"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fsebb"]
+atlas = ExtResource("8_mjuv5")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_804yk"]
 atlas = ExtResource("2_en1fj")
 region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipaip"]
+atlas = ExtResource("8_mjuv5")
+region = Rect2(200, 0, 100, 110)
 
 [node name="Result" type="Control"]
 layout_mode = 3
@@ -69,38 +79,29 @@ layout_mode = 2
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/CenterContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_ddooa")
-
-[node name="StageSelectButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/CenterContainer"]
+[node name="StageSelectButton" type="TextureButton" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/CenterContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_i2qta")
+texture_normal = SubResource("AtlasTexture_st6hf")
+texture_pressed = SubResource("AtlasTexture_p4p8c")
 
 [node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/CenterContainer2"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_o3xn1")
-
-[node name="RetryButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/CenterContainer2"]
+[node name="RetryButton" type="TextureButton" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/CenterContainer2"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_i2qta")
+texture_normal = SubResource("AtlasTexture_sksbt")
+texture_pressed = SubResource("AtlasTexture_fsebb")
 
 [node name="CenterContainer3" type="CenterContainer" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/CenterContainer3"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_j8e36")
-
-[node name="PlayButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/CenterContainer3"]
+[node name="PlayButton" type="TextureButton" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/CenterContainer3"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_i2qta")
+texture_normal = SubResource("AtlasTexture_804yk")
+texture_pressed = SubResource("AtlasTexture_ipaip")
 
 [node name="Stamp" type="TextureRect" parent="."]
 unique_name_in_owner = true

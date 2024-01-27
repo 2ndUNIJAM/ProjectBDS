@@ -18,7 +18,12 @@ public partial class InventoryView : Control
 	{
 	}
 
-	public void UpdateInventoryView(Inventory inventory)
+	public void UpdateInventoryView(State state, Vector2I _position)
+	{
+		InternalUpdateInventoryView(state.Inventory);
+	}
+
+	private void InternalUpdateInventoryView(Inventory inventory)
 	{
 		int tileIndex = 0;
 		foreach(Tile tile in inventory.Tiles) 
@@ -31,7 +36,7 @@ public partial class InventoryView : Control
 			}
 
 			InventoryItem item = ItemListNode.GetChild<InventoryItem>(tileIndex);
-			item.SetItem(tile);
+			item.SetItem(tile, tileIndex);
 			item.Visible = true;
 			++tileIndex;
 		}

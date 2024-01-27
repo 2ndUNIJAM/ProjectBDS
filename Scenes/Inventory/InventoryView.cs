@@ -11,7 +11,7 @@ public partial class InventoryView : Control
 
 	public override void _Ready()
 	{
-		ItemListNode = GetNode<Node>("Slider/ItemList");
+		ItemListNode = GetNode<Node>("ScrollContainer/ItemList");
 	}
 
 	public override void _Process(double delta)
@@ -52,3 +52,4 @@ public partial class InventoryView : Control
 		ItemListNode.AddChild(newItem);
 	}
 }
+

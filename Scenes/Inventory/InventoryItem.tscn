@@ -11,41 +11,34 @@
 atlas = ExtResource("1_1xfk1")
 region = Rect2(533, 1066, 533, 533)
 
-[node name="InventoryItem" type="Control"]
-layout_mode = 3
+[node name="InventoryItem" type="CenterContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -619.0
+offset_bottom = -115.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
 script = ExtResource("1_kcqja")
 NodeAtlasTexture = ExtResource("2_vkjig")
 
 [node name="Left" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 2
 texture = ExtResource("2_nndsy")
 
 [node name="Right" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 2
 texture = ExtResource("2_iw5qh")
 
 [node name="Down" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 2
 texture = SubResource("AtlasTexture_8i0sc")
 
 [node name="Up" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 2
 texture = ExtResource("3_0gi0q")
 
 [node name="Node" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 2

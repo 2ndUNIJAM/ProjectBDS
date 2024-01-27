@@ -143,7 +143,7 @@ public partial class TileHandler : GodotObject
 
 	static public void PopulateMapWithJson(Grid grid, Inventory inventory, in string filePath)
 	{
-		Godot.Collections.Dictionary jsonMap =  TileHandler.LoadJsonMapFiles(filePath);
+		Godot.Collections.Dictionary jsonMap = LoadJsonMapFiles(filePath);
 		int gridWidth = (int)jsonMap["width"];
 		int gridHeight = (int)jsonMap["height"];
 		for (int i = 0; i < gridHeight; ++i)

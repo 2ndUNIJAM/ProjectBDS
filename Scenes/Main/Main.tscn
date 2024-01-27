@@ -30,14 +30,16 @@ script = ExtResource("3_hpcr6")
 [node name="Input" parent="." node_paths=PackedStringArray("viewer") instance=ExtResource("4_ww7tm")]
 viewer = NodePath("../TileMap")
 
-[node name="Inventory" parent="." node_paths=PackedStringArray("InputNode") instance=ExtResource("5_66ouf")]
-InputNode = NodePath("../Input")
-
 [node name="Evaluator" type="Node" parent="."]
 script = ExtResource("6_pp8jg")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Inventory" parent="CanvasLayer" node_paths=PackedStringArray("InputNode") instance=ExtResource("5_66ouf")]
+InputNode = NodePath("../../Input")
+
 [connection signal="OnStateUpdate" from="StateController" to="TileMap" method="UpdateGridView"]
-[connection signal="OnStateUpdate" from="StateController" to="Inventory" method="UpdateInventoryView"]
+[connection signal="OnStateUpdate" from="StateController" to="CanvasLayer/Inventory" method="UpdateInventoryView"]
 [connection signal="OnStateUpdate" from="StateController" to="Evaluator" method="UpdateGridEvaluationView"]
 [connection signal="OnGrabGrid" from="Input" to="StateController" method="GrabGridSelect"]
 [connection signal="OnGrabInventory" from="Input" to="StateController" method="GrabInventorySelect"]

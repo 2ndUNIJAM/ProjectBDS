@@ -54,7 +54,7 @@ public partial class Tester : Node
 
 		GD.Print("here");
 
-		GridEvaluator myGridEvaluator = GetNode<GridEvaluator>("res://Scripts/View/GridEvaluator.cs");
+		GridEvaluator myGridEvaluator = GetNode<GridEvaluator>("../grid_evaluator");
 		bool isCorrect = myGridEvaluator.EvaluationEdgeCondition(testGrid);
 		GD.Print(isCorrect);
 

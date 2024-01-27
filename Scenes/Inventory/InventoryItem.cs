@@ -12,6 +12,9 @@ public partial class InventoryItem : Control
 	[Export]
 	int AtlasTileSize = 533;
 
+	[Signal]
+	public delegate void OnItemClickEventHandler(int index);
+
 	public void SetItem(Tile tile, int id)
 	{
 		TextureRect testRect = GetNode<TextureRect>("Left");
@@ -27,4 +30,11 @@ public partial class InventoryItem : Control
 		GetNode<TextureRect>("Node").Texture = nodeTexture;
 		Id = id;
 	}
+
+	public void OnItemClickHanndler()
+	{
+		GD.Print($"Select {Id} inventory Item");
+		EmitSignal(SignalName.OnItemClick, Id);
+	}
 }
+

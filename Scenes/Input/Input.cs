@@ -8,7 +8,7 @@ public partial class Input : Node
 	public delegate void OnGrabGridEventHandler(Vector2I tilePosition);
 
 	[Signal]
-	public delegate void OnGrabInventoryEventHandler();
+	public delegate void OnGrabInventoryEventHandler(int index);
 
 	[Signal]
 	public delegate void OnGridTileRemoveEventHandler(Vector2I TilePosition);
@@ -48,10 +48,9 @@ public partial class Input : Node
 		}
 	}
 
-/*	public Vector2I GetTilePos()
+	public void SelectInventoryItem(int inventoryIndex)
 	{
-		Debug.Assert(tile_map != null);
-		Vector2 mouse_pos = (GetViewport().GetMousePosition());
-		return tile_map.LocalToMap(mouse_pos);
-	}*/
+		GD.Print($"Inventory Input! {inventoryIndex}");
+		EmitSignal(SignalName.OnGrabInventory, inventoryIndex);
+	}
 }

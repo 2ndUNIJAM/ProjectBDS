@@ -214,4 +214,9 @@ public partial class TileHandler : GodotObject
 		GD.Print($"Add new inventory ${inventory.Tiles.Count} itmes");
 		return;
 	}
+
+	static public void AddInventoryGrab(Grab grab, int index)
+	{
+		grab.InventoryGrab = index;
+	}
 }

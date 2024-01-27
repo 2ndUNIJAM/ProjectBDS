@@ -7,6 +7,9 @@ public partial class InventoryView : Control
 	[Export]
 	PackedScene ItemNode;
 
+	[Export]
+	Input InputNode;
+
 	Node ItemListNode;
 
 	public override void _Ready()
@@ -55,6 +58,10 @@ public partial class InventoryView : Control
 		InventoryItem newItem = ItemNode.Instantiate<InventoryItem>();
 		newItem.SetItem(tile, tileIndex);
 		ItemListNode.AddChild(newItem);
+		if (InputNode != null)
+		{
+			newItem.OnItemClick += InputNode.SelectInventoryItem;
+		}
 	}
 }
 

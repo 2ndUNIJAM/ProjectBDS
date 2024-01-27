@@ -102,9 +102,15 @@ public partial class Tester : Node
         GridEvaluator myGridEvaluator = GetNode<GridEvaluator>("../GridEvaluator");
 		bool isCorrect = myGridEvaluator.EvaluationEdgeCondition(testGrid);
 		GD.Print(isCorrect);
-
-		int comboScore = myGridEvaluator.EvaluateScore(testGrid);
-		GD.Print(comboScore);
+        
+		List<List<Vector2I>>comboList = myGridEvaluator.EvaluateScore(testGrid);
+		foreach(List<Vector2I> list in comboList)
+        {
+            foreach(Vector2I item in list)
+            {
+                GD.Print(item);
+            }
+        }
 
 		
 

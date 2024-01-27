@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://257u5fcoumtk"]
+[gd_scene load_steps=10 format=3 uid="uid://257u5fcoumtk"]
 
+[ext_resource type="Texture2D" uid="uid://chp12b6hhxe88" path="res://Scenes/StageSelect/Select_bg.png" id="1_8l2d6"]
 [ext_resource type="Texture2D" uid="uid://bx8odp3qll17o" path="res://Scenes/StageSelect/Select_Sprite/spr_lvl456.png" id="1_dk3j0"]
 [ext_resource type="Texture2D" uid="uid://ckjwgweavh8jp" path="res://Scenes/StageSelect/Select_Sprite/spr_lvl123.png" id="1_eygxf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t6k2i"]
-atlas = ExtResource("1_dk3j0")
+atlas = ExtResource("1_eygxf")
 region = Rect2(0, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w582g"]
@@ -30,6 +31,11 @@ region = Rect2(384, 0, 192, 192)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_8l2d6")
+
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,7 +50,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 240)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "Stage Select"
+text = "선택한다 당신 재개발 구역을"
 vertical_alignment = 1
 
 [node name="CenterContainer2" type="CenterContainer" parent="CanvasLayer/VBoxContainer"]

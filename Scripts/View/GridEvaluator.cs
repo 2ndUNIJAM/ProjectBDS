@@ -198,7 +198,13 @@ public partial class GridEvaluator : Node
 		}
 
 		GD.Print("Edge condition is "+isEdgeConditionCorrect+"\nTotal Combo is "+totalComboScore);
-	}
+        Label myScoreLabel = GetNode<Label>("../HUD/Score");
+
+		String EdgeCondition = null;
+		if (isEdgeConditionCorrect) EdgeCondition = "SOLVED";
+		else EdgeCondition = "WRONG";
+		myScoreLabel.Text = "This puzzle is currently: " + EdgeCondition + "\nScore: " + totalComboScore;
+    }
 
 	List<Vector2I> BFS(int x, int y, Grid grid, ref bool[,] isVisited)
 	{

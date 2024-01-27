@@ -7,9 +7,15 @@ public partial class InventoryItem : Control
 	Texture2D NodeAtlasTexture;
 
 	[Export]
+	int Id;
+
+	[Export]
 	int AtlasTileSize = 533;
 
-	public void SetItem(Tile tile)
+	[Signal]
+	public delegate void OnItemClickEventHandler(int index);
+
+	public void SetItem(Tile tile, int id)
 	{
 		TextureRect testRect = GetNode<TextureRect>("Left");
 		GetNode<TextureRect>("Left").Visible = tile.West == EdgeType.Connected;
@@ -22,5 +28,13 @@ public partial class InventoryItem : Control
 		int nodeIndex = (int)tile.Node;
 		nodeTexture.Region = new Rect2(0, nodeIndex * AtlasTileSize, new Vector2(AtlasTileSize, AtlasTileSize));
 		GetNode<TextureRect>("Node").Texture = nodeTexture;
+		Id = id;
+	}
+
+	public void OnItemClickHanndler()
+	{
+		GD.Print($"Select {Id} inventory Item");
+		EmitSignal(SignalName.OnItemClick, Id);
 	}
 }
+

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dpwwt0mkfaye"]
+[gd_scene load_steps=9 format=3 uid="uid://dpwwt0mkfaye"]
 
 [ext_resource type="Texture2D" uid="uid://bsf14vd5a71pu" path="res://Sprites/spr_roadTest.png" id="1_1xfk1"]
 [ext_resource type="Script" path="res://Scenes/Inventory/InventoryItem.cs" id="1_kcqja"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://porcgexh8g2l" path="res://Sprites/TestRoadAtlas/TestLeft.tres" id="2_nndsy"]
 [ext_resource type="Texture2D" uid="uid://dwcur2is6m865" path="res://Sprites/spr_bulidings.png" id="2_vkjig"]
 [ext_resource type="Texture2D" uid="uid://dgifxdrjkp5x6" path="res://Sprites/TestRoadAtlas/TestUp.tres" id="3_0gi0q"]
+[ext_resource type="Theme" uid="uid://bh82mxwna8mr0" path="res://Scenes/Inventory/InventoryItemTheme.tres" id="7_wgk34"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8i0sc"]
 atlas = ExtResource("1_1xfk1")
@@ -42,3 +43,10 @@ texture = ExtResource("3_0gi0q")
 
 [node name="Node" type="TextureRect" parent="."]
 layout_mode = 2
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(533, 533)
+layout_mode = 2
+theme = ExtResource("7_wgk34")
+
+[connection signal="button_down" from="Button" to="." method="OnItemClickHanndler"]

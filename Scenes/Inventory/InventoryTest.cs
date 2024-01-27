@@ -16,6 +16,6 @@ public partial class InventoryTest : Node
 	{
 		inventory.Tiles.AddLast(new Tile());
 		InventoryView inventoryView = GetNode<InventoryView>("..");
-		inventoryView.UpdateInventoryView(inventory);
+		//inventoryView.UpdateInventoryView(inventory);
 	}
 }

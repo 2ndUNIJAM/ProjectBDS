@@ -30,4 +30,10 @@ public partial class StateController : Node
         TileHandler.RemoveTile(state.Grid, state.Grab, state.Inventory);
         EmitSignal(SignalName.OnStateUpdate, state, target);
     }
+
+	public void GrabInventorySelect(int index)
+	{
+		TileHandler.AddInventoryGrab(state.Grab, index);
+		EmitSignal(SignalName.OnStateUpdate, state, Vector2I.Zero);
+	}
 }

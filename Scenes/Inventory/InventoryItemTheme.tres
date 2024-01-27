@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bh82mxwna8mr0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vqvjn"]
+
+[resource]
+Button/colors/icon_normal_color = Color(0, 0, 0, 0)
+Button/styles/normal = SubResource("StyleBoxTexture_vqvjn")

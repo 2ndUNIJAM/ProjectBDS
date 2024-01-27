@@ -7,6 +7,9 @@ public partial class InventoryView : Control
 	[Export]
 	PackedScene ItemNode;
 
+	[Export]
+	Input InputNode;
+
 	Node ItemListNode;
 
 	public override void _Ready()
@@ -18,7 +21,12 @@ public partial class InventoryView : Control
 	{
 	}
 
-	public void UpdateInventoryView(Inventory inventory)
+	public void UpdateInventoryView(State state, Vector2I _position)
+	{
+		InternalUpdateInventoryView(state.Inventory);
+	}
+
+	private void InternalUpdateInventoryView(Inventory inventory)
 	{
 		int tileIndex = 0;
 		foreach(Tile tile in inventory.Tiles) 
@@ -26,12 +34,12 @@ public partial class InventoryView : Control
 			if(ItemListNode.GetChildCount() <= tileIndex)
 			{
 				++tileIndex;
-				SpawnItem(tile);
+				SpawnItem(tile, tileIndex);
 				continue;
 			}
 
 			InventoryItem item = ItemListNode.GetChild<InventoryItem>(tileIndex);
-			item.SetItem(tile);
+			item.SetItem(tile, tileIndex);
 			item.Visible = true;
 			++tileIndex;
 		}
@@ -43,13 +51,17 @@ public partial class InventoryView : Control
 		}
 	}
 
-	void SpawnItem(Tile tile)
+	void SpawnItem(Tile tile, int tileIndex)
 	{
 		Debug.Assert(ItemListNode != null, "ItemListNode is null for inventory!");
 
 		InventoryItem newItem = ItemNode.Instantiate<InventoryItem>();
-		newItem.SetItem(tile);
+		newItem.SetItem(tile, tileIndex);
 		ItemListNode.AddChild(newItem);
+		if (InputNode != null)
+		{
+			newItem.OnItemClick += InputNode.SelectInventoryItem;
+		}
 	}
 }
 

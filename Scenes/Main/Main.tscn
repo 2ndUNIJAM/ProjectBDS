@@ -10,6 +10,10 @@
 
 [node name="TileMap" parent="." instance=ExtResource("1_2mq06")]
 position = Vector2(4.74, 0)
+layer_2/z_index = -1
+layer_3/z_index = -1
+layer_4/z_index = -1
+layer_5/z_index = -1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1150, 650)

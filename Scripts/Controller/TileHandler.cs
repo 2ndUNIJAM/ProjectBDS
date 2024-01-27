@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class TileHandler : GodotObject
 {
@@ -35,21 +36,23 @@ public partial class TileHandler : GodotObject
         // Swap tile one by one
         int swappedX = target.X;
         int swappedY = target.Y;
+        if (swappedY < 0 || swappedY >= grid.Tiles.Count ||
+           swappedX < 0 || swappedX >= grid.Tiles[0].Count)
+        {
+            GD.Print("Swap Pos is out of Range");
+            grab.GridGrab.Clear();
+            GD.Print(grab.GridGrab.Count);
+            grab.InventoryGrab = -1;    
+            return;
+        }
         // if tiles are from the inventory
         if (grab.InventoryGrab>=0)
         {
             GD.Print("Swap from Inventory");
             int inventoryIdx = grab.InventoryGrab;
             Tile tempTile = grid.Tiles[swappedY][swappedX];
-            Tile inventoryTile = null;
-            int curIdx = 0;
-            foreach(Tile tile in inventory.Tiles)
-            {
-                if (curIdx > inventoryIdx) break;
-                inventoryTile = tile;
-                curIdx++;
-                
-            }
+            Tile inventoryTile = inventory.Tiles.ElementAt<Tile>(inventoryIdx);
+            GD.Print("Swapped Tile: " + inventoryTile.Node);
             grid.Tiles[swappedY][swappedX] = inventoryTile;
             inventory.Tiles.Remove(inventoryTile);
             if (tempTile == null)
@@ -88,8 +91,15 @@ public partial class TileHandler : GodotObject
 
         // Check is out of range
 
-        if (placedY < 0 || placedY > grid.Tiles.Count ||
-            placedX < 0 || placedX > grid.Tiles[0].Count) return;
+        if (placedY < 0 || placedY >= grid.Tiles.Count ||
+            placedX < 0 || placedX >= grid.Tiles[0].Count)
+        {
+            GD.Print("Target Pos is out of Range");
+            grab.GridGrab.Clear();
+            GD.Print(grab.GridGrab.Count);
+            grab.InventoryGrab = -1;
+            return;
+        }
 
         // if tiles are from the inventory
         if (grab.InventoryGrab >= 0)
@@ -175,7 +185,22 @@ public partial class TileHandler : GodotObject
 
 			Tile newTile = new Tile();
 			float nodeValue = (float)jsonTile["node"];
-			newTile.Node = (NodeType)((int)nodeValue);
+            newTile.Node = (NodeType)((int)nodeValue - 1);
+
+            switch (nodeValue)
+            {
+                case 1:
+                    newTile.atlas_coord = new Vector2I(0, 0);
+                    break;
+                case 2:
+                    newTile.atlas_coord = new Vector2I(0, 1);
+                    break;
+                case 3:
+                    newTile.atlas_coord = new Vector2I(0, 2);
+                    break;
+                default:
+                    break;
+            }
 
 			Godot.Collections.Array<Variant> jsonRoad = (Godot.Collections.Array<Variant>)jsonTile["road"];
 

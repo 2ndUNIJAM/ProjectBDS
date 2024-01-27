@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class StateController : Node
 {
@@ -8,13 +9,21 @@ public partial class StateController : Node
 
     [Signal]
     public delegate void OnStateUpdateEventHandler(State state, Vector2I updatedPoint);
+
+    bool bOnIntialize;
     public override void _Ready()
     {
         state = GetNode<State>("../State");
-        Tile tile = new Tile();
-        tile.East = EdgeType.Connected;
-        state.Inventory.Tiles.AddLast(tile);
-        TileHandler.PushInventoryGrab(state.Grab, 0);
+        bOnIntialize = false;
+    }
+
+    public override void _Process(double delta)
+    {
+        if (!bOnIntialize)
+        {
+            bOnIntialize = true;
+            EmitSignal(SignalName.OnStateUpdate, state, Vector2I.Zero);
+        }
     }
     public void GrabGridSelect(Vector2I target)
     {
@@ -33,6 +42,7 @@ public partial class StateController : Node
 
 	public void GrabInventorySelect(int index)
 	{
+        GD.Print($"{state.Inventory.Tiles.ElementAt<Tile>(index).atlas_coord}");
 		TileHandler.AddInventoryGrab(state.Grab, index);
 		EmitSignal(SignalName.OnStateUpdate, state, Vector2I.Zero);
 	}

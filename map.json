@@ -1,14 +1,54 @@
 {
-    "width": 100,
-    "height": 100,
+    "width": 4,
+    "height": 3,
     "tiles": [
         {
             "node": 1,
-            "road": ["w", "e", "n", "s"]
+            "road": ["e"]
+        },
+        {
+            "node": 1,
+            "road": ["w", "s", "e"]
+        },
+        {
+            "node": 1,
+            "road": ["w", "s", "e"]
         },
         {
             "node": 2,
-            "road": ["w", "e", "n", "s"]
+            "road": ["n"]
+        },
+        {
+            "node": 2,
+            "road": ["w","n"]
+        },
+        {
+            "node": 2,
+            "road": ["n","e"]
+        },
+        {
+            "node": 2,
+            "road": ["s","e"]
+        },
+        {
+            "node": 2,
+            "road": ["w","e"]
+        },
+        {
+            "node": 2,
+            "road": ["e", "w", "s", "n"]
+        },
+        {
+            "node": 3,
+            "road": ["w", "s"]
+        },
+        {
+            "node": 3,
+            "road": ["w", "n", "e"]
+        },
+        {
+            "node": 3,
+            "road": ["n", "w", "s"]
         }
     ]
 }

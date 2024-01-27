@@ -7,7 +7,7 @@ public partial class GridViewer : TileMap
 
 	Vector2I curTilePos;
 
-    int road_source_id = 1;
+    int road_source_id = 2;
     int[] road_layer = { 2, 3, 4, 5 };
     Vector2I[] road_atlas_coords = { new Vector2I(0, 0), new Vector2I(1, 0), new Vector2I(0, 1), new Vector2I(1, 1) };
 
@@ -55,7 +55,6 @@ public partial class GridViewer : TileMap
 			for (int j = 0; j < grid.Tiles[i].Count; j++)
 			{
 				Tile tile = grid.Tiles[i][j];
-				//PlaceRoad(grid,new Vector2I(j,i));
 				if (tile == null)
 				{
 					for (int k = 0; k < GetLayersCount(); k++)
@@ -64,7 +63,9 @@ public partial class GridViewer : TileMap
 					}
 					continue;
 				}
-				SetTileInTileMap(tile.tile_layer, new Vector2I(j, i), tile.source_id, tile.atlas_coord);
+                PlaceRoad(grid,new Vector2I(j,i));
+                SetTileInTileMap(tile.tile_layer, new Vector2I(j, i), tile.source_id, tile.atlas_coord);
+				GD.Print(tile.atlas_coord);
 			}
 		}
 	}
@@ -81,17 +82,18 @@ public partial class GridViewer : TileMap
     public void PlaceRoad(Grid grid, Vector2I target)
     {
 		if (grid == null) return;
-
-		if (grid.Tiles[target.Y][target.X].North == EdgeType.Connected) SetTileInTileMap(road_layer[0], target, road_source_id, road_atlas_coords[0]);
+		GD.Print("Place Road");
+		int x = target.X, y = target.Y;
+		if (grid.Tiles[y][x].North == EdgeType.Connected) SetTileInTileMap(road_layer[0], target, road_source_id, road_atlas_coords[0]);
 		else EraseTileInTileMap(road_layer[0], target);
 
-        if (grid.Tiles[target.Y][target.X].East == EdgeType.Connected) SetTileInTileMap(road_layer[1], target, road_source_id, road_atlas_coords[1]);
+        if (grid.Tiles[y][x].East == EdgeType.Connected) SetTileInTileMap(road_layer[1], target, road_source_id, road_atlas_coords[1]);
         else EraseTileInTileMap(road_layer[1], target);
 
-        if (grid.Tiles[target.Y][target.X].West == EdgeType.Connected) SetTileInTileMap(road_layer[2], target, road_source_id, road_atlas_coords[2]);
+        if (grid.Tiles[y][x].West == EdgeType.Connected) SetTileInTileMap(road_layer[2], target, road_source_id, road_atlas_coords[2]);
         else EraseTileInTileMap(road_layer[2], target);
 
-        if (grid.Tiles[target.Y][target.X].South == EdgeType.Connected) SetTileInTileMap(road_layer[3], target, road_source_id, road_atlas_coords[3]);
+        if (grid.Tiles[y][x].South == EdgeType.Connected) SetTileInTileMap(road_layer[3], target, road_source_id, road_atlas_coords[3]);
         else EraseTileInTileMap(road_layer[3], target);
     }
 

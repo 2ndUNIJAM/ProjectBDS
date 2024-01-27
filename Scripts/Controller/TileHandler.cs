@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class TileHandler : GodotObject
 {
@@ -140,4 +141,77 @@ public partial class TileHandler : GodotObject
         return jsonMap;
     }
 
+	static public void PopulateMapWithJson(Grid grid, Inventory inventory, in string filePath)
+	{
+		Godot.Collections.Dictionary jsonMap =  TileHandler.LoadJsonMapFiles(filePath);
+		int gridWidth = (int)jsonMap["width"];
+		int gridHeight = (int)jsonMap["height"];
+		for (int i = 0; i < gridHeight; ++i)
+		{
+			List<Tile> newList = new List<Tile>();
+			for (int j = 0; j < gridWidth; ++j)
+			{
+				newList.Add(null);
+			}
+			grid.Tiles.Add(newList);
+		}
+
+		Godot.Collections.Array<Variant> jsonTiles = (Godot.Collections.Array<Variant>)jsonMap["tiles"];
+
+		if (jsonTiles == null)
+		{
+			GD.PrintErr("\"tiles\" is not properly set");
+			return;
+		}
+
+		foreach(Variant tileVar  in jsonTiles)
+		{
+			Godot.Collections.Dictionary jsonTile = (Godot.Collections.Dictionary)tileVar;
+			if (jsonTile == null)
+			{
+				GD.PrintErr("\"tiles\" is not properly set");
+				return;
+			}
+
+			Tile newTile = new Tile();
+			float nodeValue = (float)jsonTile["node"];
+			newTile.Node = (NodeType)((int)nodeValue);
+
+			Godot.Collections.Array<Variant> jsonRoad = (Godot.Collections.Array<Variant>)jsonTile["road"];
+
+			List<string> roadList = new List<string>();
+			foreach(Variant varRoad in jsonRoad)
+			{
+				string road = (string)varRoad;
+				roadList.Add(road);
+			}
+
+			if (roadList.Contains("e"))
+			{
+				newTile.East = EdgeType.Connected;
+			}
+
+			if (roadList.Contains("w"))
+			{
+				newTile.West = EdgeType.Connected;
+			}
+
+			if (roadList.Contains("s"))
+			{
+				newTile.South = EdgeType.Connected;
+			}
+
+			if (roadList.Contains("n"))
+			{
+				newTile.North = EdgeType.Connected;
+			}
+
+			inventory.Tiles.AddLast(newTile);
+		}
+
+		GD.Print("Read Map Done");
+		GD.Print($"Width: {gridWidth} / Height: {gridHeight}");
+		GD.Print($"Add new inventory ${inventory.Tiles.Count} itmes");
+		return;
+	}
 }

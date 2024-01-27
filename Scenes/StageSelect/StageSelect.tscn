@@ -1,0 +1,100 @@
+[gd_scene load_steps=9 format=3 uid="uid://257u5fcoumtk"]
+
+[ext_resource type="Texture2D" uid="uid://bx8odp3qll17o" path="res://Scenes/StageSelect/Select_Sprite/spr_lvl456.png" id="1_dk3j0"]
+[ext_resource type="Texture2D" uid="uid://ckjwgweavh8jp" path="res://Scenes/StageSelect/Select_Sprite/spr_lvl123.png" id="1_eygxf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6k2i"]
+atlas = ExtResource("1_dk3j0")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w582g"]
+atlas = ExtResource("1_eygxf")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_opp8i"]
+load_path = "res://.godot/imported/spr_lvl123.png-e2aab08c47b6660d2dc5344059dc5a70.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t1yhg"]
+atlas = SubResource("CompressedTexture2D_opp8i")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n487s"]
+atlas = ExtResource("1_dk3j0")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wg0kk"]
+atlas = ExtResource("1_dk3j0")
+region = Rect2(384, 0, 192, 192)
+
+[node name="StageSelect" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Stage Select"
+vertical_alignment = 1
+
+[node name="CenterContainer2" type="CenterContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/VBoxContainer/CenterContainer2"]
+layout_mode = 2
+columns = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer/CenterContainer2/GridContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 144
+theme_override_constants/margin_bottom = 16
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer2/GridContainer/MarginContainer"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_t6k2i")
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/VBoxContainer/CenterContainer2/GridContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 144
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer2/GridContainer/MarginContainer2"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_w582g")
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/VBoxContainer/CenterContainer2/GridContainer"]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer2/GridContainer/MarginContainer3"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_t1yhg")
+
+[node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/VBoxContainer/CenterContainer2/GridContainer"]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer2/GridContainer/MarginContainer4"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_t6k2i")
+
+[node name="MarginContainer5" type="MarginContainer" parent="CanvasLayer/VBoxContainer/CenterContainer2/GridContainer"]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer2/GridContainer/MarginContainer5"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_n487s")
+
+[node name="MarginContainer6" type="MarginContainer" parent="CanvasLayer/VBoxContainer/CenterContainer2/GridContainer"]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer2/GridContainer/MarginContainer6"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_wg0kk")

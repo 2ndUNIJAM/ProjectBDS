@@ -1,7 +1,7 @@
 [gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://b8vdybkb8yq0t"]
 
-[ext_resource type="Texture2D" uid="uid://bsf14vd5a71pu" path="res://Sprites/spr_roadTest.png" id="1_icxre"]
+[ext_resource type="Texture2D" uid="uid://cfve48i0hbs71" path="res://Sprites/road.png" id="1_30y57"]
 
 [resource]
-atlas = ExtResource("1_icxre")
-region = Rect2(0, 533, 533, 533)
+atlas = ExtResource("1_30y57")
+region = Rect2(512, 512, 512, 512)

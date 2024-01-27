@@ -14,7 +14,7 @@ public partial class InventoryView : Control
 
 	public override void _Ready()
 	{
-		ItemListNode = GetNode<Node>("ScrollContainer/ItemList");
+		ItemListNode = GetNode<Node>("MarginContainer/ScrollContainer/ItemList");
 	}
 
 	public override void _Process(double delta)

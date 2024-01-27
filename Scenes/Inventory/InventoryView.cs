@@ -31,7 +31,7 @@ public partial class InventoryView : Control
 			if(ItemListNode.GetChildCount() <= tileIndex)
 			{
 				++tileIndex;
-				SpawnItem(tile);
+				SpawnItem(tile, tileIndex);
 				continue;
 			}
 
@@ -48,12 +48,12 @@ public partial class InventoryView : Control
 		}
 	}
 
-	void SpawnItem(Tile tile)
+	void SpawnItem(Tile tile, int tileIndex)
 	{
 		Debug.Assert(ItemListNode != null, "ItemListNode is null for inventory!");
 
 		InventoryItem newItem = ItemNode.Instantiate<InventoryItem>();
-		newItem.SetItem(tile);
+		newItem.SetItem(tile, tileIndex);
 		ItemListNode.AddChild(newItem);
 	}
 }

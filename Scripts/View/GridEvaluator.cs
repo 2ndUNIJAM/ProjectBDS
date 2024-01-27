@@ -26,7 +26,7 @@ public partial class GridEvaluator : Node
 			}
 			GD.Print("");
 		}
-		UpdateScoreBoardView();
+		UpdateScoreBoardView(bPass, comboList);
     }
 	
 	public bool InternalEvaluationEdgeCondition(Grid grid) // 엣지체킹함수
@@ -187,9 +187,17 @@ public partial class GridEvaluator : Node
 		return SurroundingComboTiles;
 	}
 	
-	void UpdateScoreBoardView()
+	void UpdateScoreBoardView(bool isEdgeConditionCorrect, List<List<Vector2I>> comboList)
 	{
-		
+		int totalComboScore = 0;
+		for(int i=0; i<comboList.Count; i++)
+		{
+			int comboCount = comboList[i].Count;
+			int comboPower = comboCount * comboCount;
+			totalComboScore += comboPower;
+		}
+
+		GD.Print("Edge condition is "+isEdgeConditionCorrect+"\nTotal Combo is "+totalComboScore);
 	}
 
 	List<Vector2I> BFS(int x, int y, Grid grid, ref bool[,] isVisited)

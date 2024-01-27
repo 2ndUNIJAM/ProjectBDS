@@ -36,6 +36,8 @@ InputNode = NodePath("../Input")
 [node name="Evaluator" type="Node" parent="."]
 script = ExtResource("6_pp8jg")
 
+[node name="ScoreUI" type="Node2D" parent="."]
+
 [connection signal="OnStateUpdate" from="StateController" to="TileMap" method="UpdateGridView"]
 [connection signal="OnStateUpdate" from="StateController" to="Inventory" method="UpdateInventoryView"]
 [connection signal="OnStateUpdate" from="StateController" to="Evaluator" method="UpdateGridEvaluationView"]

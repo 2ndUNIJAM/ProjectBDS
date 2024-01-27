@@ -99,20 +99,7 @@ public partial class Tester : Node
         testGrid.Tiles[3].Add(tile8);
         testGrid.Tiles[3].Add(tile10);
 
-        GridEvaluator myGridEvaluator = GetNode<GridEvaluator>("../GridEvaluator");
-		bool isCorrect = myGridEvaluator.EvaluationEdgeCondition(testGrid);
-		GD.Print(isCorrect);
-        
-		List<List<Vector2I>>comboList = myGridEvaluator.EvaluateScore(testGrid);
-		foreach(List<Vector2I> list in comboList)
-        {
-            foreach(Vector2I item in list)
-            {
-                GD.Print(item);
-            }
-        }
-
-		
+        //вп
 
 	}
 

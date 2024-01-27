@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bmu0yx4fvuqpk"]
+[gd_scene load_steps=7 format=3 uid="uid://bmu0yx4fvuqpk"]
 
 [ext_resource type="PackedScene" uid="uid://bv12jevebwfge" path="res://Scenes/Main/Map.tscn" id="1_2mq06"]
 [ext_resource type="Script" path="res://Scenes/Main/State.cs" id="2_b6ynt"]
 [ext_resource type="Script" path="res://Scripts/Controller/StateController.cs" id="3_hpcr6"]
 [ext_resource type="PackedScene" uid="uid://cvklbwqdgptht" path="res://Scenes/Input/Input.tscn" id="4_ww7tm"]
 [ext_resource type="PackedScene" uid="uid://duhffdexnc71q" path="res://Scenes/Inventory/Inventory.tscn" id="5_66ouf"]
+[ext_resource type="Script" path="res://Scripts/View/GridEvaluator.cs" id="6_pp8jg"]
 
 [node name="Main" type="Node2D"]
 
@@ -32,8 +33,12 @@ viewer = NodePath("../TileMap")
 [node name="Inventory" parent="." node_paths=PackedStringArray("InputNode") instance=ExtResource("5_66ouf")]
 InputNode = NodePath("../Input")
 
+[node name="Evaluator" type="Node" parent="."]
+script = ExtResource("6_pp8jg")
+
 [connection signal="OnStateUpdate" from="StateController" to="TileMap" method="UpdateGridView"]
 [connection signal="OnStateUpdate" from="StateController" to="Inventory" method="UpdateInventoryView"]
+[connection signal="OnStateUpdate" from="StateController" to="Evaluator" method="UpdateGridEvaluationView"]
 [connection signal="OnGrabGrid" from="Input" to="StateController" method="GrabGridSelect"]
 [connection signal="OnGrabInventory" from="Input" to="StateController" method="GrabInventorySelect"]
 [connection signal="OnGridTileRemove" from="Input" to="StateController" method="GridTileRemove"]

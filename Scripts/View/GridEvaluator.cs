@@ -12,8 +12,24 @@ public partial class GridEvaluator : Node
 	{
 
 	}
+
+	public void UpdateGridEvaluationView(State state, Vector2I updatedPoint)
+	{
+		bool bPass = InternalEvaluationEdgeCondition(state.Grid);
+		List<List<Vector2I>> comboList = InternalEvaluateCombo(state.Grid);
+		GD.Print(bPass);
+		foreach(List<Vector2I> list in comboList)
+		{
+			foreach(Vector2I item in list)
+			{
+				GD.Print(item);
+			}
+			GD.Print("");
+		}
+		UpdateScoreBoardView();
+    }
 	
-	public bool EvaluationEdgeCondition(Grid grid) // 엣지체킹함수
+	public bool InternalEvaluationEdgeCondition(Grid grid) // 엣지체킹함수
 	{
 		for(int i = 0; i<grid.Tiles.Count; i++) 
 		{
@@ -27,16 +43,16 @@ public partial class GridEvaluator : Node
 					continue;
 				}
 				// 위쪽 확인
-				bool isUpInvalid = !(i > 0 && grid.Tiles[i][j].North != grid.Tiles[i - 1][j].South);
+				bool isUpInvalid = !(i > 0 && grid.Tiles[i - 1][j] != null && grid.Tiles[i][j].North != grid.Tiles[i - 1][j].South) || grid.Tiles[i][j].North == EdgeType.DisConnected;
 				GD.Print(isUpInvalid);
 				// 아래쪽 확인
-				bool isDownInvalid = !(i < grid.Tiles.Count && grid.Tiles[i][j].South != grid.Tiles[i + 1][j].North);
+				bool isDownInvalid = !(i < grid.Tiles.Count-1 && grid.Tiles[i + 1][j] != null && grid.Tiles[i][j].South != grid.Tiles[i + 1][j].North) || grid.Tiles[i][j].South == EdgeType.DisConnected;
 				GD.Print(isDownInvalid);
 				// 왼쪽 확인
-				bool isLeftInvalid = !(j > 0 && grid.Tiles[i][j].West != grid.Tiles[i][j - 1].East);
+				bool isLeftInvalid = !(j > 0 && grid.Tiles[i][j - 1] != null && grid.Tiles[i][j].West != grid.Tiles[i][j - 1].East) || grid.Tiles[i][j].West == EdgeType.DisConnected;
 				GD.Print(isLeftInvalid);
 				// 오른쪽 확인
-				bool isRightInvalid = !(j < grid.Tiles[i].Count && grid.Tiles[i][j].East != grid.Tiles[i][j + 1].West);
+				bool isRightInvalid = !(j < grid.Tiles[i].Count-1 && grid.Tiles[i][j + 1] != null && grid.Tiles[i][j].East != grid.Tiles[i][j + 1].West) || grid.Tiles[i][j].East == EdgeType.DisConnected;
 				GD.Print(isRightInvalid);
 
 				if (isUpInvalid || isDownInvalid || isLeftInvalid || isRightInvalid) 
@@ -48,7 +64,7 @@ public partial class GridEvaluator : Node
 		return true;
 	}
 
-	public List<List<Vector2I>> EvaluateScore(Grid grid) //콤보체킹함수
+	public List<List<Vector2I>> InternalEvaluateCombo(Grid grid) //콤보체킹함수
 	{
 		int width = grid.Tiles[0].Count;
 		int height = grid.Tiles.Count;
@@ -171,12 +187,6 @@ public partial class GridEvaluator : Node
 		return SurroundingComboTiles;
 	}
 	
-	/*
-	List EvaluateComboPosition(Grid grid, Vector2I UpdatedPoint)
-	{
-	}
-	*/
-	
 	void UpdateScoreBoardView()
 	{
 		
@@ -205,11 +215,14 @@ public partial class GridEvaluator : Node
             Tile curTile = grid.Tiles[curPos.Y][curPos.X];
             for (int i=0; i<4; i++)
 			{
+				if (curTile == null) break;
                 //bool check = false;
                 int nx = curPos.X + dx[i];
 				int ny = curPos.Y + dy[i];
+
 				if(nx>=0 && ny>=0 && nx<width && ny<height && !isVisited[ny,nx])
 				{
+                    if (grid.Tiles[ny][nx] == null) continue;
                     if (i == 0) //상
                     {
                         if(curTile.North == grid.Tiles[ny][nx].South && curTile.North == EdgeType.Connected && curTile.Node == grid.Tiles[ny][nx].Node)

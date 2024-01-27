@@ -11,8 +11,9 @@ public partial class StateController : Node
     public override void _Ready()
     {
         state = GetNode<State>("../State");
-
-        state.Inventory.Tiles.AddLast(new Tile());
+        Tile tile = new Tile();
+        tile.East = EdgeType.Connected;
+        state.Inventory.Tiles.AddLast(tile);
         TileHandler.PushInventoryGrab(state.Grab, 0);
     }
     public void GrabGridSelect(Vector2I target)

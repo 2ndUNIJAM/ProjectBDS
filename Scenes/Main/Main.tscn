@@ -20,8 +20,8 @@ script = ExtResource("2_b6ynt")
 [node name="StateController" type="Node" parent="."]
 script = ExtResource("3_hpcr6")
 
-[node name="Input" parent="." node_paths=PackedStringArray("tile_map") instance=ExtResource("4_ww7tm")]
-tile_map = NodePath("../TileMap")
+[node name="Input" parent="." node_paths=PackedStringArray("viewer") instance=ExtResource("4_ww7tm")]
+viewer = NodePath("../TileMap")
 
 [connection signal="OnStateUpdate" from="StateController" to="TileMap" method="UpdateGridView"]
 [connection signal="OnGrabGrid" from="Input" to="StateController" method="GrabGridSelect"]

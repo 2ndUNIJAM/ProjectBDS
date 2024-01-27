@@ -13,15 +13,21 @@ public partial class Input : Node
 	[Signal]
 	public delegate void OnGridTileRemoveEventHandler(Vector2I TilePosition);
 
-	[Export]
-	TileMap tile_map = null;
+/*	[Export]
+	TileMap tile_map = null;*/
 
+	[Export]
+	GridViewer viewer;
 	public override void _Ready()
 	{
+		
 	}
 
 	public override void _Process(double delta)
 	{
+/*		GD.Print($"{GetViewport().GetMousePosition()}");
+		
+		GD.Print(viewer.GetTilePos());*/
 	}
 
 	public override void _Input(InputEvent @event)
@@ -31,21 +37,21 @@ public partial class Input : Node
 			if (!eventMouseButton.IsReleased()) return;
 			if (eventMouseButton.ButtonIndex == MouseButton.Left)
 			{
-				EmitSignal(SignalName.OnGrabGrid,GetTilePos());
+				EmitSignal(SignalName.OnGrabGrid,viewer.GetTilePos());
 			}
 
 			if (eventMouseButton.ButtonIndex == MouseButton.Right)
 			{
-				EmitSignal(SignalName.OnGridTileRemove, GetTilePos());
+				EmitSignal(SignalName.OnGridTileRemove, viewer.GetTilePos());
 			}
 
 		}
 	}
 
-	public Vector2I GetTilePos()
+/*	public Vector2I GetTilePos()
 	{
 		Debug.Assert(tile_map != null);
-		Vector2 mouse_pos = GetViewport().GetMousePosition();
+		Vector2 mouse_pos = (GetViewport().GetMousePosition());
 		return tile_map.LocalToMap(mouse_pos);
-	}
+	}*/
 }

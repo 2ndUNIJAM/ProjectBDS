@@ -10,14 +10,22 @@ public partial class TileHandler : GodotObject
         if (grab.GridGrab.Count > 0)
         {
             GD.Print("Remove Tile");
-            foreach (Vector2I targetTile in grab.GridGrab)
+            for(int i=0; i<grab.GridGrab.Count; i++)
+            {
+                int x = grab.GridGrab[i].X;
+                int y = grab.GridGrab[i].Y;
+                inventory.Tiles.AddLast(grid.Tiles[y][x]);
+                grab.GridGrab.Remove(new Vector2I(x, y));
+                grid.Tiles[y][x] = null;
+            }
+/*            foreach (Vector2I targetTile in grab.GridGrab)
             {
                 int x = targetTile.X;
                 int y = targetTile.Y;
                 inventory.Tiles.AddLast(grid.Tiles[y][x]);
                 grab.GridGrab.Remove(new Vector2I(x,y));
                 grid.Tiles[y][x] = null;
-            }
+            }*/
         }
     }
 

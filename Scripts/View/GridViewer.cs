@@ -97,7 +97,7 @@ public partial class GridViewer : TileMap
 
     public Vector2I GetTilePos()
 	{
-		Vector2 mouse_pos = GetViewport().GetMousePosition();
+		Vector2 mouse_pos = GetLocalMousePosition();
 		return this.LocalToMap(mouse_pos);
 	}
 

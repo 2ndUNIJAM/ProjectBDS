@@ -60,10 +60,7 @@ public class Grid
 		for (int i = 0; i < 1; i++)
 		{
 			Tiles.Add(new List<Tile>());
-			for (int j = 0; j < 1; j++)
-			{
-				Tiles[i].Add(null);
-			}
+
 		}
 	}
 	public Grid(int width, int height)

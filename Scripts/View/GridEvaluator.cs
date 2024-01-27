@@ -10,8 +10,7 @@ public partial class GridEvaluator : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		//Grid sampleGrid = new Grid();
-		//GD.Print("is this working?");
+
 	}
 	
 	public bool EvaluationEdgeCondition(Grid grid) //엣지체킹함수
@@ -20,21 +19,25 @@ public partial class GridEvaluator : Node
 		{
 			for(int j = 0; j<grid.Tiles[i].Count; j++)
 			{
+				GD.Print("가로줄: "+grid.Tiles.Count);
+				GD.Print("세로줄: "+grid.Tiles[i].Count);
+
 				if (grid.Tiles[i][j] == null) //현재 좌표에 타일이 놓여있을 경우
 				{
 					continue;
 				}
 				//위쪽 확인
 				bool isUpInvalid = !(i > 0 && grid.Tiles[i][j].North != grid.Tiles[i - 1][j].South);
-					
+				GD.Print(isUpInvalid);
 				//아래쪽 확인
-				bool isDownInvalid = !(i < grid.Tiles.Count && grid.Tiles[i][j].South!=grid.Tiles[i+1][j].North);
-
+				bool isDownInvalid = !(i < grid.Tiles.Count && grid.Tiles[i][j].South != grid.Tiles[i + 1][j].North);
+				GD.Print(isDownInvalid + " and j is " + j);
 				//왼쪽 확인
 				bool isLeftInvalid = !(j > 0 && grid.Tiles[i][j].West != grid.Tiles[i][j - 1].East);
-					
+				GD.Print(isLeftInvalid);
 				//오른쪽 확인
-				bool isRightInvalid = !(j<grid.Tiles[i].Count && grid.Tiles[i][j].East!=grid.Tiles[i][j + 1].West);
+				bool isRightInvalid = !(j < grid.Tiles[i].Count && grid.Tiles[i][j].East != grid.Tiles[i][j + 1].West);
+				GD.Print(isRightInvalid);
 
 				if (isUpInvalid || isDownInvalid || isLeftInvalid || isRightInvalid) 
 				{
@@ -105,7 +108,7 @@ public partial class GridEvaluator : Node
 			}
 		} while (!isFinishedChecking);
 
-		int FinalScore = 0;
+		int FinalScore = 500;
 
 		return FinalScore;
 

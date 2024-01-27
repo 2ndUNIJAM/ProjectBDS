@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class GridEvaluator : Node
 {
@@ -10,54 +11,49 @@ public partial class GridEvaluator : Node
 		//GD.Print("is this working?");
 	}
 	
-	bool EvaluationEdgeCondition(Grid grid)
+	bool EvaluationEdgeCondition(Grid grid) //엣지체킹함수
 	{
-		for(int i=0; i<grid.Count; i++) //
+		for(int i = 0; i<grid.Tiles.Count; i++) 
 		{
-			for(int j=0; j<grid[i].Count; j++)
+			for(int j = 0; j<grid.Tiles[i].Count; j++)
 			{
-				if(grid[i][j]!=null) //현재 좌표에 타일이 놓여있을 경우
+				if (grid.Tiles[i][j] == null) //현재 좌표에 타일이 놓여있을 경우
 				{
-					//왼쪽 확인
-					if(i>0) //맨 왼쪽이 아니라면
-					{
-						if(grid[i][j].West!=grid[i-1][j].East) return false;
-					}	
+					continue;
+				}
+				//위쪽 확인
+				bool isUpInvalid = i > 0 && grid.Tiles[i][j].North != grid.Tiles[i - 1][j].South;
 					
-					//오른쪽 확인
-					if(i<grid.Count) //맨 오른쪽이 아니라면
-					{
-						if(grid[i][j].East!=grid[i+1][j].West) return false;
-					}
+				//아래쪽 확인
+				bool isDownInvalid = !(i < grid.Tiles.Count && grid.Tiles[i][j].South!=grid.Tiles[i+1][j].North);
+
+				//왼쪽 확인
+				bool isLeftInvalid = !(j > 0 && grid.Tiles[i][j].West != grid.Tiles[i][j - 1].East);
 					
-					//위쪽 확인
-					if(j>0) //맨 위쪽이 아니라면
-					{
-						if(grid[i][j].North!=grid[i][j-1].South) return false;
-					}
-					
-					//아래쪽 확인
-					if(j<grid[i].Count)//맨 아래쪽이 아니라면
-					{
-						if(grid[i][j].South!=grid[i][j+1].North) return false;
-					}
-				}	
+				//오른쪽 확인
+				bool isRightInvalid = !(j<grid.Tiles[i].Count && grid.Tiles[i][j].East!=grid.Tiles[i][j + 1].West);
+
+				if (isUpInvalid || isDownInvalid || isLeftInvalid || isRightInvalid) 
+				{
+					return false;
+				}
 			}
 		}
-		
+		return true;
 	}
 	
-	int EvaluateScore(Grid grid)
+	int EvaluateScore(Grid grid) //콤보체킹함수
 	{
-		
+		return 0;
 	}
 	
+	/*
 	List EvaluateComboPosition(Grid grid, Vector2I UpdatedPoint)
 	{
-		
 	}
+	*/
 	
-	UpdateScoreBoardView()
+	void UpdateScoreBoardView()
 	{
 		
 	}

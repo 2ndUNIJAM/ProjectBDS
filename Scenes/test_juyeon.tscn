@@ -1,8 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://dds6j263ufe3e"]
+[gd_scene load_steps=3 format=3 uid="uid://dds6j263ufe3e"]
 
 [ext_resource type="Script" path="res://Scripts/View/GridEvaluator.cs" id="1_usuog"]
+[ext_resource type="Script" path="res://Scenes/Tester.cs" id="2_csd1n"]
 
 [node name="Test_Juyeon" type="Node2D"]
 
 [node name="grid_evaluator" type="Node2D" parent="."]
 script = ExtResource("1_usuog")
+
+[node name="Tester" type="Node" parent="."]
+script = ExtResource("2_csd1n")

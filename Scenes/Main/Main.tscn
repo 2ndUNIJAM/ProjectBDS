@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bmu0yx4fvuqpk"]
+[gd_scene load_steps=9 format=3 uid="uid://bmu0yx4fvuqpk"]
 
 [ext_resource type="PackedScene" uid="uid://bv12jevebwfge" path="res://Scenes/Main/Map.tscn" id="1_2mq06"]
+[ext_resource type="Texture2D" uid="uid://cofktos6xgtsw" path="res://Scenes/Main/bg_desk.png" id="1_fidjh"]
 [ext_resource type="Script" path="res://Scenes/Main/State.cs" id="2_b6ynt"]
 [ext_resource type="Script" path="res://Scripts/Controller/StateController.cs" id="3_hpcr6"]
 [ext_resource type="PackedScene" uid="uid://cvklbwqdgptht" path="res://Scenes/Input/Input.tscn" id="4_ww7tm"]
@@ -9,6 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://d0e64kib72ive" path="res://Sprites/bg_main.png" id="7_sk7yl"]
 
 [node name="Main" type="Node2D"]
+
+[node name="DeskBackground" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+texture = ExtResource("1_fidjh")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(812, 360)

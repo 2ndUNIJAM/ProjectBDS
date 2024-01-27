@@ -1,16 +1,25 @@
-[gd_scene load_steps=12 format=3 uid="uid://257u5fcoumtk"]
+[gd_scene load_steps=19 format=3 uid="uid://257u5fcoumtk"]
 
 [ext_resource type="Texture2D" uid="uid://chp12b6hhxe88" path="res://Scenes/StageSelect/Select_bg.png" id="1_8l2d6"]
 [ext_resource type="Texture2D" uid="uid://bx8odp3qll17o" path="res://Scenes/StageSelect/Select_Sprite/spr_lvl456.png" id="1_dk3j0"]
 [ext_resource type="Texture2D" uid="uid://ckjwgweavh8jp" path="res://Scenes/StageSelect/Select_Sprite/spr_lvl123.png" id="1_eygxf"]
 [ext_resource type="Script" path="res://Scenes/StageSelect/StageSelect.cs" id="1_fkkfi"]
+[ext_resource type="Texture2D" uid="uid://k7vkpvei8bgf" path="res://Scenes/StageSelect/Select_Sprite/stage_button_2.png" id="4_guiu2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t6k2i"]
 atlas = ExtResource("1_eygxf")
 region = Rect2(0, 0, 192, 192)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_gw2ee"]
+atlas = ExtResource("4_guiu2")
+region = Rect2(0, 0, 192, 192)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_w582g"]
 atlas = ExtResource("1_eygxf")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sj2ma"]
+atlas = ExtResource("4_guiu2")
 region = Rect2(192, 0, 192, 192)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_opp8i"]
@@ -20,17 +29,33 @@ load_path = "res://.godot/imported/spr_lvl123.png-e2aab08c47b6660d2dc5344059dc5a
 atlas = SubResource("CompressedTexture2D_opp8i")
 region = Rect2(384, 0, 192, 192)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8gyb"]
+atlas = ExtResource("4_guiu2")
+region = Rect2(384, 0, 192, 192)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_1rk2c"]
 atlas = ExtResource("1_dk3j0")
 region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cuy6y"]
+atlas = ExtResource("4_guiu2")
+region = Rect2(0, 192, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n487s"]
 atlas = ExtResource("1_dk3j0")
 region = Rect2(192, 0, 192, 192)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_k4psu"]
+atlas = ExtResource("4_guiu2")
+region = Rect2(192, 192, 192, 192)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_wg0kk"]
 atlas = ExtResource("1_dk3j0")
 region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ot457"]
+atlas = ExtResource("4_guiu2")
+region = Rect2(384, 192, 192, 192)
 
 [node name="StageSelect" type="Node2D" node_paths=PackedStringArray("Buttons")]
 script = ExtResource("1_fkkfi")
@@ -81,6 +106,7 @@ theme_override_constants/margin_bottom = 16
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer2/GridContainer/MarginContainer"]
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_t6k2i")
+texture_pressed = SubResource("AtlasTexture_gw2ee")
 
 [node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/VBoxContainer/CenterContainer2/GridContainer"]
 layout_mode = 2
@@ -89,6 +115,7 @@ theme_override_constants/margin_right = 144
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer2/GridContainer/MarginContainer2"]
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_w582g")
+texture_pressed = SubResource("AtlasTexture_sj2ma")
 
 [node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/VBoxContainer/CenterContainer2/GridContainer"]
 layout_mode = 2
@@ -96,6 +123,7 @@ layout_mode = 2
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer2/GridContainer/MarginContainer3"]
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_t1yhg")
+texture_pressed = SubResource("AtlasTexture_o8gyb")
 
 [node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/VBoxContainer/CenterContainer2/GridContainer"]
 layout_mode = 2
@@ -103,6 +131,7 @@ layout_mode = 2
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer2/GridContainer/MarginContainer4"]
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_1rk2c")
+texture_pressed = SubResource("AtlasTexture_cuy6y")
 
 [node name="MarginContainer5" type="MarginContainer" parent="CanvasLayer/VBoxContainer/CenterContainer2/GridContainer"]
 layout_mode = 2
@@ -110,6 +139,7 @@ layout_mode = 2
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer2/GridContainer/MarginContainer5"]
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_n487s")
+texture_pressed = SubResource("AtlasTexture_k4psu")
 
 [node name="MarginContainer6" type="MarginContainer" parent="CanvasLayer/VBoxContainer/CenterContainer2/GridContainer"]
 layout_mode = 2
@@ -117,3 +147,4 @@ layout_mode = 2
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer2/GridContainer/MarginContainer6"]
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_wg0kk")
+texture_pressed = SubResource("AtlasTexture_ot457")

@@ -25,7 +25,7 @@ public partial class TileHandler : GodotObject
         // if tiles are from the inventory
         if (grab.InventoryGrab>=0)
         {
-            //GD.Print("Swap from Inventory");
+            GD.Print("Swap from Inventory");
             int inventoryIdx = grab.InventoryGrab;
             Tile tempTile = grid.Tiles[swappedY][swappedX];
             Tile inventoryTile = null;
@@ -43,7 +43,7 @@ public partial class TileHandler : GodotObject
         }
         else if(grab.GridGrab.Count>0)
         {
-            //GD.Print("Swap from GridGrab");
+            GD.Print("Swap from GridGrab");
             int grabbedTileX = grab.GridGrab[0].X;
             int grabbedTileY = grab.GridGrab[0].Y;
 /*            GD.Print("x: " + grabbedTileX + ", y: " + grabbedTileY);
@@ -70,7 +70,7 @@ public partial class TileHandler : GodotObject
         // if tiles are from the inventory
         if (grab.InventoryGrab >= 0)
         {
-            //GD.Print("Place from Inventory");
+            GD.Print("Place from Inventory");
             int inventoryIdx = grab.InventoryGrab;
             Tile inventoryTile = null;
             int curIdx = 0;
@@ -86,8 +86,12 @@ public partial class TileHandler : GodotObject
         }
         else if (grab.GridGrab.Count > 0)
         {
-            //GD.Print("Place from GridGrab");
-            SwapTiles(grid, grab, inventory, target);
+            GD.Print("Place from GridGrab");
+            int grabbedTileX = grab.GridGrab[0].X;
+            int grabbedTileY = grab.GridGrab[0].Y;
+            grid.Tiles[placedY][placedX] = grid.Tiles[grabbedTileY][grabbedTileX];
+            grab.GridGrab.RemoveAt(0);
+            //SwapTiles(grid, grab, inventory, target);
         }
 
         // Place tiles at once
@@ -97,6 +101,19 @@ public partial class TileHandler : GodotObject
     public void PushInventoryGrab(Grab grab, int target)
     {
         grab.InventoryGrab = target;
+    }
+
+    public Godot.Collections.Dictionary LoadJsonMapFiles(in string filePath)
+    {
+        using var file = FileAccess.Open(filePath, FileAccess.ModeFlags.Read);
+        if (file == null)
+        {
+            GD.Print("Can't find file");
+            return null;
+        }
+        string content = file.GetAsText();
+        Godot.Collections.Dictionary jsonMap = (Godot.Collections.Dictionary)Json.ParseString(content);
+        return jsonMap;
     }
 
 }

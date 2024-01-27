@@ -12,6 +12,9 @@ public partial class SceneManager : Node
 	[Export]
 	string[] MapPaths = new string[6];
 
+	[Export]
+	AudioStream BackgroundMusic;
+
 	string _MapPath;
 
 	public string MapPath { get =>_MapPath; }

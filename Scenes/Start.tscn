@@ -1,8 +1,43 @@
-[gd_scene load_steps=2 format=3 uid="uid://qgg72282x00d"]
+[gd_scene load_steps=8 format=3 uid="uid://ddbmrdsaow7ac"]
 
 [ext_resource type="Script" path="res://Scripts/Controller/SceneManager.cs" id="1_b8ueq"]
+[ext_resource type="PackedScene" uid="uid://257u5fcoumtk" path="res://Scenes/StageSelect/StageSelect.tscn" id="2_27by0"]
+[ext_resource type="PackedScene" uid="uid://bmu0yx4fvuqpk" path="res://Scenes/Main/Main.tscn" id="3_degxc"]
+[ext_resource type="AudioStream" uid="uid://dcvmra4uuljt3" path="res://Sound/BackgroundMusic.mp3" id="4_e04cl"]
+[ext_resource type="Texture2D" uid="uid://b1q051pb5m6qf" path="res://Sprites/title.png" id="4_j7g1d"]
+[ext_resource type="Texture2D" uid="uid://crcaoo78xhl3p" path="res://Sprites/start_button_1.png" id="5_2mvqy"]
+[ext_resource type="Texture2D" uid="uid://cqi3x0h1xiklr" path="res://Sprites/start_button_2.png" id="6_u18kt"]
 
 [node name="Start" type="Node2D"]
 
 [node name="SceneManager" type="Node" parent="."]
 script = ExtResource("1_b8ueq")
+StageSelectScene = ExtResource("2_27by0")
+MainScene = ExtResource("3_degxc")
+MapPaths = PackedStringArray("res://Maps/stage1.json", "res://Maps/stage2.json", "res://Maps/stage3.json", "res://Maps/stage4.json", "res://Maps/stage5.json", "res://Maps/stage6.json")
+BackgroundMusic = ExtResource("4_e04cl")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_j7g1d")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="CenterContainer2" type="CenterContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/VBoxContainer/CenterContainer2"]
+layout_mode = 2
+texture_normal = ExtResource("5_2mvqy")
+texture_pressed = ExtResource("6_u18kt")
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/TextureButton" to="SceneManager" method="StageSelect"]

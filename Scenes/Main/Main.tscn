@@ -1,15 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmu0yx4fvuqpk"]
+[gd_scene load_steps=5 format=3 uid="uid://bmu0yx4fvuqpk"]
 
 [ext_resource type="PackedScene" uid="uid://bv12jevebwfge" path="res://Scenes/Main/Map.tscn" id="1_2mq06"]
 [ext_resource type="Script" path="res://Scenes/Main/State.cs" id="2_b6ynt"]
+[ext_resource type="Script" path="res://Scripts/Controller/StateController.cs" id="3_hpcr6"]
+[ext_resource type="PackedScene" uid="uid://cvklbwqdgptht" path="res://Scenes/Input/Input.tscn" id="4_ww7tm"]
 
 [node name="Main" type="Node2D"]
 
 [node name="TileMap" parent="." instance=ExtResource("1_2mq06")]
-scale = Vector2(0.125, 0.125)
+position = Vector2(4.74, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1150, 650)
 zoom = Vector2(0.5, 0.5)
 
 [node name="State" type="Node" parent="."]
 script = ExtResource("2_b6ynt")
+
+[node name="StateController" type="Node" parent="."]
+script = ExtResource("3_hpcr6")
+
+[node name="Input" parent="." node_paths=PackedStringArray("tile_map") instance=ExtResource("4_ww7tm")]
+tile_map = NodePath("../TileMap")
+
+[connection signal="OnStateUpdate" from="StateController" to="TileMap" method="UpdateGridView"]
+[connection signal="OnGrabGrid" from="Input" to="StateController" method="GrabGridSelect"]
+[connection signal="OnGridTileRemove" from="Input" to="StateController" method="GridTileRemove"]

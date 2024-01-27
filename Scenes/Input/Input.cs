@@ -1,10 +1,11 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class Input : Node
 {
 	[Signal]
-	public delegate void OnGrabGridEventHandler();
+	public delegate void OnGrabGridEventHandler(Vector2I tilePosition);
 
 	[Signal]
 	public delegate void OnGrabInventoryEventHandler();
@@ -27,8 +28,10 @@ public partial class Input : Node
 	{
 		if (@event is InputEventMouseButton eventMouseButton)
 		{
+			if (!eventMouseButton.IsReleased()) return;
 			if (eventMouseButton.ButtonIndex == MouseButton.Left)
 			{
+				EmitSignal(SignalName.OnGrabGrid,GetTilePos());
 			}
 
 			if (eventMouseButton.ButtonIndex == MouseButton.Right)
@@ -41,7 +44,7 @@ public partial class Input : Node
 
 	public Vector2I GetTilePos()
 	{
-		if (tile_map == null) return Vector2I.Zero;
+		Debug.Assert(tile_map != null);
 		Vector2 mouse_pos = GetViewport().GetMousePosition();
 		return tile_map.LocalToMap(mouse_pos);
 	}

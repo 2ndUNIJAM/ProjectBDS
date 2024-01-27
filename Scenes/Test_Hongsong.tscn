@@ -1,31 +1,36 @@
-[gd_scene load_steps=4 format=3 uid="uid://bk70jjqmfa3w8"]
+[gd_scene load_steps=5 format=3 uid="uid://bk70jjqmfa3w8"]
 
 [ext_resource type="TileSet" uid="uid://lf24lae0wu1r" path="res://TileSets/TileSet.tres" id="1_bderr"]
 [ext_resource type="Script" path="res://Scripts/TestNode.cs" id="3_0bs62"]
 [ext_resource type="Script" path="res://Scripts/View/GridViewer.cs" id="4_3fpft"]
+[ext_resource type="Script" path="res://Scenes/Input/Input.cs" id="4_bly4m"]
 
 [node name="Scene" type="Node"]
 
-[node name="TileMap" type="TileMap" parent="." node_paths=PackedStringArray("tile_map")]
+[node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("1_bderr")
 format = 2
 layer_0/name = "Background"
 layer_1/name = "Building"
 layer_1/tile_data = PackedInt32Array()
-layer_2/name = "RoadLeftLayer"
+layer_2/name = "RoadUpLayer"
+layer_2/z_index = -1
 layer_2/tile_data = PackedInt32Array()
 layer_3/name = "RoadRightLayer"
+layer_3/z_index = -1
 layer_3/tile_data = PackedInt32Array()
-layer_4/name = "RoadUpLayer"
+layer_4/name = "RoadLeftLayer"
+layer_4/z_index = -1
 layer_4/tile_data = PackedInt32Array()
 layer_5/name = "RoadDownLayer"
+layer_5/z_index = -1
 layer_5/tile_data = PackedInt32Array()
 script = ExtResource("4_3fpft")
-tile_map = NodePath(".")
-
-[node name="World" type="Node" parent="."]
 
 [node name="TestGridNode" type="Node" parent="."]
 script = ExtResource("3_0bs62")
-gridWidth = 100
-gridHeight = 100
+gridWidth = null
+gridHeight = null
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("4_bly4m")

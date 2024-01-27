@@ -3,12 +3,13 @@ using System;
 
 public partial class TileHandler : GodotObject
 {
-    public void RemoveTile(Grid grid, Grab grab, Inventory inventory)
+    static public void RemoveTile(Grid grid, Grab grab, Inventory inventory)
     {
         if (grid == null) return;
         if (grab == null) return;
         if (grab.GridGrab.Count > 0)
         {
+            GD.Print("Remove Tile");
             foreach (Vector2I targetTile in grab.GridGrab)
             {
                 int x = targetTile.X;
@@ -20,7 +21,7 @@ public partial class TileHandler : GodotObject
         }
     }
 
-    public void SwapTiles(Grid grid, Grab grab, Inventory inventory, Vector2I target)
+    static public void SwapTiles(Grid grid, Grab grab, Inventory inventory, Vector2I target)
     {
         // Swap tile one by one
         int swappedX = target.X;
@@ -42,6 +43,7 @@ public partial class TileHandler : GodotObject
             }
             grid.Tiles[swappedY][swappedX] = inventoryTile;
             inventory.Tiles.Remove(inventoryTile);
+            if (tempTile == null) return;
             inventory.Tiles.AddLast(tempTile);
         }
         else if(grab.GridGrab.Count>0)
@@ -60,12 +62,12 @@ public partial class TileHandler : GodotObject
         // ?
     }
 
-    public void PushGridGrab(Grab grab, Vector2I target)
+    static public void PushGridGrab(Grab grab, Vector2I target)
     {
          grab.GridGrab.Add(target);
     }
 
-    public void PlaceTile(Grid grid, Grab grab, Inventory inventory, Vector2I target)
+    static public void PlaceTile(Grid grid, Grab grab, Inventory inventory, Vector2I target)
     {
         // Place tile one by one
         int placedX = target.X;
@@ -74,7 +76,7 @@ public partial class TileHandler : GodotObject
         if (grab.InventoryGrab >= 0)
         {
             GD.Print("Place from Inventory");
-            int inventoryIdx = grab.InventoryGrab;
+            /*sint inventoryIdx = grab.InventoryGrab;
             Tile inventoryTile = null;
             int curIdx = 0;
             foreach (Tile tile in inventory.Tiles)
@@ -85,28 +87,29 @@ public partial class TileHandler : GodotObject
             }
             grid.Tiles[placedY][placedX] = inventoryTile;
             inventory.Tiles.Remove(inventoryTile);
-            grab.InventoryGrab = -1;
+            grab.InventoryGrab = -1;*/
+            SwapTiles(grid, grab, inventory, target);
         }
         else if (grab.GridGrab.Count > 0)
         {
             GD.Print("Place from GridGrab");
-            int grabbedTileX = grab.GridGrab[0].X;
+/*            int grabbedTileX = grab.GridGrab[0].X;
             int grabbedTileY = grab.GridGrab[0].Y;
             grid.Tiles[placedY][placedX] = grid.Tiles[grabbedTileY][grabbedTileX];
-            grab.GridGrab.RemoveAt(0);
-            //SwapTiles(grid, grab, inventory, target);
+            grab.GridGrab.RemoveAt(0);*/
+            SwapTiles(grid, grab, inventory, target);
         }
 
         // Place tiles at once
         // ?
     }
 
-    public void PushInventoryGrab(Grab grab, int target)
+    static public void PushInventoryGrab(Grab grab, int target)
     {
         grab.InventoryGrab = target;
     }
 
-    public Godot.Collections.Dictionary LoadJsonMapFiles(in string filePath)
+    static public Godot.Collections.Dictionary LoadJsonMapFiles(in string filePath)
     {
         using var file = FileAccess.Open(filePath, FileAccess.ModeFlags.Read);
         if (file == null)

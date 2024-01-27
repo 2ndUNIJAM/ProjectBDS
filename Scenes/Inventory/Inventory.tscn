@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://duhffdexnc71q"]
+
+[ext_resource type="Script" path="res://Scenes/Inventory/InventoryView.cs" id="1_8d127"]
+[ext_resource type="PackedScene" uid="uid://dpwwt0mkfaye" path="res://Scenes/Inventory/InventoryItem.tscn" id="2_vr1t6"]
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_8d127")
+ItemNode = ExtResource("2_vr1t6")
+
+[node name="Slider" type="HSlider" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 16.0
+
+[node name="ItemList" type="HBoxContainer" parent="Slider"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(378, 167)
+zoom = Vector2(0.2, 0.2)

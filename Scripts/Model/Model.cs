@@ -16,7 +16,7 @@ public enum NodeType
 public class Tile 
 {
 	public EdgeType East;
-	public EdgeType Weast;
+	public EdgeType West;
 	public EdgeType South;
 	public EdgeType North;
 	public NodeType Node;

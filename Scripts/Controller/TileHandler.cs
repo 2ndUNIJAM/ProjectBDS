@@ -17,17 +17,10 @@ public partial class TileHandler : GodotObject
                 int x = grab.GridGrab[i].X;
                 int y = grab.GridGrab[i].Y;
                 inventory.Tiles.AddLast(grid.Tiles[y][x]);
-                grab.GridGrab.Remove(new Vector2I(x, y));
                 grid.Tiles[y][x] = null;
+                grab.GridGrab.RemoveAt(0);
             }
-/*            foreach (Vector2I targetTile in grab.GridGrab)
-            {
-                int x = targetTile.X;
-                int y = targetTile.Y;
-                inventory.Tiles.AddLast(grid.Tiles[y][x]);
-                grab.GridGrab.Remove(new Vector2I(x,y));
-                grid.Tiles[y][x] = null;
-            }*/
+            grab.GridGrab.Clear();
         }
     }
 
@@ -36,12 +29,13 @@ public partial class TileHandler : GodotObject
         // Swap tile one by one
         int swappedX = target.X;
         int swappedY = target.Y;
+
         if (swappedY < 0 || swappedY >= grid.Tiles.Count ||
-           swappedX < 0 || swappedX >= grid.Tiles[0].Count)
+            swappedX < 0 || swappedX >= grid.Tiles[0].Count)
         {
             GD.Print("Swap Pos is out of Range");
-            grab.GridGrab.Clear();
-            GD.Print(grab.GridGrab.Count);
+            if (grab.GridGrab.Count > 0)
+                grab.GridGrab.Clear();
             grab.InventoryGrab = -1;    
             return;
         }
@@ -65,38 +59,43 @@ public partial class TileHandler : GodotObject
         else if(grab.GridGrab.Count>0)
         {
             GD.Print("Swap from GridGrab");
+
             int grabbedTileX = grab.GridGrab[0].X;
             int grabbedTileY = grab.GridGrab[0].Y;
-/*            GD.Print("x: " + grabbedTileX + ", y: " + grabbedTileY);
-            GD.Print("x: " + swappedY + ", y: " + swappedX);*/
+
             (grid.Tiles[grabbedTileY][grabbedTileX], grid.Tiles[swappedY][swappedX])
                 = (grid.Tiles[swappedY][swappedX], grid.Tiles[grabbedTileY][grabbedTileX]);
+
             grab.GridGrab.RemoveAt(0);
         }
-
-        // Swap tiles at once
-        // ?
     }
 
-    static public void PushGridGrab(Grab grab, Vector2I target)
+    static public void PushGridGrab(State state, Vector2I target)
     {
-         grab.GridGrab.Add(target);
+        Grid grid = state.Grid;
+        int x = target.X;
+        int y = target.Y;
+        if (x < 0 || x >= grid.Tiles[0].Count || y < 0 || y >= grid.Tiles.Count) return;
+        InternalGridGrab(state.Grab, target);
+    }
+
+    static private void InternalGridGrab(Grab grab, Vector2I target)
+    {
+        grab.GridGrab.Add(target);
     }
 
     static public void PlaceTile(Grid grid, Grab grab, Inventory inventory, Vector2I target)
     {
-        // Place tile one by one
         int placedX = target.X;
         int placedY = target.Y;
 
         // Check is out of range
-
         if (placedY < 0 || placedY >= grid.Tiles.Count ||
-            placedX < 0 || placedX >= grid.Tiles[0].Count)
+            placedX < 0 || placedX >= grid.Tiles[0].Count)  
         {
             GD.Print("Target Pos is out of Range");
-            grab.GridGrab.Clear();
-            GD.Print(grab.GridGrab.Count);
+            if(grab.GridGrab.Count>0)
+                grab.GridGrab.Clear();
             grab.InventoryGrab = -1;
             return;
         }
@@ -105,27 +104,11 @@ public partial class TileHandler : GodotObject
         if (grab.InventoryGrab >= 0)
         {
             GD.Print("Place from Inventory");
-            /*sint inventoryIdx = grab.InventoryGrab;
-            Tile inventoryTile = null;
-            int curIdx = 0;
-            foreach (Tile tile in inventory.Tiles)
-            {
-                if (curIdx > inventoryIdx) break;
-                inventoryTile = tile;
-                curIdx++;
-            }
-            grid.Tiles[placedY][placedX] = inventoryTile;
-            inventory.Tiles.Remove(inventoryTile);
-            grab.InventoryGrab = -1;*/
             SwapTiles(grid, grab, inventory, target);
         }
         else if (grab.GridGrab.Count > 0)
         {
             GD.Print("Place from GridGrab");
-/*            int grabbedTileX = grab.GridGrab[0].X;
-            int grabbedTileY = grab.GridGrab[0].Y;
-            grid.Tiles[placedY][placedX] = grid.Tiles[grabbedTileY][grabbedTileX];
-            grab.GridGrab.RemoveAt(0);*/
             SwapTiles(grid, grab, inventory, target);
         }
 

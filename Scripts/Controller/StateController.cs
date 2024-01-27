@@ -28,7 +28,7 @@ public partial class StateController : Node
     public void GrabGridSelect(Vector2I target)
     {
         if (state.Grab.GridGrab.Count <= 0 && state.Grab.InventoryGrab < 0)
-            TileHandler.PushGridGrab(state.Grab, target);
+            TileHandler.PushGridGrab(state, target);
         else
             TileHandler.PlaceTile(state.Grid, state.Grab, state.Inventory, target);
         EmitSignal(SignalName.OnStateUpdate, state, target);

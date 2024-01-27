@@ -39,6 +39,17 @@ script = ExtResource("6_pp8jg")
 
 [node name="ScoreUI" type="Node2D" parent="."]
 
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Score" type="Label" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 20
+
 [connection signal="OnStateUpdate" from="StateController" to="TileMap" method="UpdateGridView"]
 [connection signal="OnStateUpdate" from="StateController" to="Inventory" method="UpdateInventoryView"]
 [connection signal="OnStateUpdate" from="StateController" to="Evaluator" method="UpdateGridEvaluationView"]

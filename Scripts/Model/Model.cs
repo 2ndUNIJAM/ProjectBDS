@@ -39,6 +39,11 @@ public class Tile
         source_id = 0;
         atlas_coord = Vector2I.Zero;
     }
+	public EdgeType East;
+	public EdgeType West;
+	public EdgeType South;
+	public EdgeType North;
+	public NodeType Node;
 }
 
 public class Inventory

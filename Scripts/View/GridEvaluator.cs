@@ -25,7 +25,7 @@ public partial class GridEvaluator : Node
 					continue;
 				}
 				//위쪽 확인
-				bool isUpInvalid = i > 0 && grid.Tiles[i][j].North != grid.Tiles[i - 1][j].South;
+				bool isUpInvalid = !(i > 0 && grid.Tiles[i][j].North != grid.Tiles[i - 1][j].South);
 					
 				//아래쪽 확인
 				bool isDownInvalid = !(i < grid.Tiles.Count && grid.Tiles[i][j].South!=grid.Tiles[i+1][j].North);
@@ -98,7 +98,7 @@ public partial class GridEvaluator : Node
 				}
 			}
 
-			for(int i = 0; i < isNodeChecked.Count; i++)
+            for(int i = 0; i < isNodeChecked.Count; i++)
 			{
 				if (isNodeChecked[i].Contains(false)) break;
 				isFinishedChecking = true;
@@ -110,6 +110,7 @@ public partial class GridEvaluator : Node
 		return FinalScore;
 
 	}
+    }
 
 	private List<Vector2I> EvaluateEdgeForCombo(Grid grid, Vector2I nodePos)
 	{
@@ -139,6 +140,8 @@ public partial class GridEvaluator : Node
 				case 3: //우
 					isCombo[i] = curTile.West == grid.Tiles[ny][nx + 1].East && curTile.Node == grid.Tiles[ny][nx + 1].Node;
 					break;
+                    isCombo[i] = curTile.North == grid.Tiles[ny - 1][nx].South && curTile.Node == grid.Tiles[ny - 1][nx].Node;
+                    break;
 
 				default:
 					break;

@@ -1,0 +1,120 @@
+[gd_scene load_steps=13 format=3 uid="uid://bsynjat4p2v62"]
+
+[ext_resource type="Script" path="res://Scenes/Result/ResultPage.cs" id="1_60ivo"]
+[ext_resource type="Texture2D" uid="uid://nory1gdadwsg" path="res://Scenes/Result/major_2-Sheet.png" id="1_lttq5"]
+[ext_resource type="Texture2D" uid="uid://hkhagaditroq" path="res://Scenes/Result/spr_button_strectehd.png" id="2_en1fj"]
+[ext_resource type="Texture2D" uid="uid://xv1jy4d5wtfq" path="res://Scenes/Result/spr_stamp1.png" id="3_5uwkp"]
+[ext_resource type="Texture2D" uid="uid://2sv1l0l6nh4u" path="res://Scenes/Result/spr_stamp2.png" id="3_swugb"]
+[ext_resource type="Texture2D" uid="uid://b831jdnxxm040" path="res://Scenes/Result/spr_stamp3.png" id="4_bodax"]
+[ext_resource type="Texture2D" uid="uid://dbsl6hh4nv7li" path="res://Scenes/Result/spr_stamp4.png" id="5_jsvin"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xepmc"]
+atlas = ExtResource("1_lttq5")
+region = Rect2(0, 0, 1280, 1280)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ddooa"]
+atlas = ExtResource("2_en1fj")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i2qta"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3xn1"]
+atlas = ExtResource("2_en1fj")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j8e36"]
+atlas = ExtResource("2_en1fj")
+region = Rect2(200, 0, 100, 100)
+
+[node name="Result" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_60ivo")
+Stamps = [ExtResource("3_5uwkp"), ExtResource("3_swugb"), ExtResource("4_bodax"), ExtResource("5_jsvin")]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_bottom = 36
+
+[node name="Mayor" type="TextureRect" parent="MarginContainer/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(384, 384)
+layout_mode = 2
+texture = SubResource("AtlasTexture_xepmc")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/CenterContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_ddooa")
+
+[node name="StageSelectButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_i2qta")
+
+[node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/CenterContainer2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_o3xn1")
+
+[node name="RetryButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/CenterContainer2"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_i2qta")
+
+[node name="CenterContainer3" type="CenterContainer" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/CenterContainer3"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_j8e36")
+
+[node name="PlayButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/CenterContainer3"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_i2qta")
+
+[node name="Stamp" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -610.0
+offset_top = 169.0
+offset_right = -226.0
+offset_bottom = -167.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("3_5uwkp")
+expand_mode = 1
+stretch_mode = 4

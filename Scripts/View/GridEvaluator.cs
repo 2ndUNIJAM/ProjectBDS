@@ -19,7 +19,7 @@ public partial class GridEvaluator : Node
 	{
 		bool bPass = InternalEvaluationEdgeCondition(state.Grid);
 		List<List<Vector2I>> comboList = InternalEvaluateCombo(state.Grid);
-        TileHandler.UpdateComboTile(state.Grid, comboList);
+		TileHandler.UpdateComboTile(state.Grid, comboList);
  /*       GD.Print(bPass);
 		foreach(List<Vector2I> list in comboList)
 		{
@@ -249,9 +249,9 @@ public partial class GridEvaluator : Node
 			totalComboScore += comboPower;
 		}
 
-		Label myScoreLabel = GetNode<Label>("../HUD/Score");
+		ScoreLabel myScoreLabel = GetNode<ScoreLabel>("../HUD/Score");
 
-		myScoreLabel.Text = $"{totalComboScore * totalComboScore}억원";
+		myScoreLabel.SetTargetScore(totalComboScore * totalComboScore);
 		GetNode<TextureButton>("../HUD/Inventory/Submit").Visible = isEdgeConditionCorrect;
 	}
 

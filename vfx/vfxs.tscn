@@ -1,58 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://dyrwbuatwuu1a"]
+[gd_scene load_steps=4 format=3 uid="uid://dyrwbuatwuu1a"]
 
-[ext_resource type="Texture2D" uid="uid://dudj3h1s5wdn0" path="res://vfx/spr_vfx_shining.png" id="1_5eih1"]
-[ext_resource type="Texture2D" uid="uid://rxdntecnojql" path="res://vfx/spr_vfx_coin.png" id="2_6o2v8"]
-[ext_resource type="Texture2D" uid="uid://dqe8sgt70f16t" path="res://vfx/spr_vfx_star.png" id="3_y1fno"]
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qf7sc"]
-inherit_velocity_ratio = 1.0
-direction = Vector3(40, 40, 40)
-spread = 180.0
-initial_velocity_min = 200.0
-initial_velocity_max = 200.0
-gravity = Vector3(0, 0, 0)
-radial_accel_min = -400.0
-radial_accel_max = -100.0
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_krfax"]
-particle_flag_disable_z = true
-angle_min = -45.0
-angle_max = 45.0
-direction = Vector3(0, -10, 0)
-initial_velocity_min = 550.0
-initial_velocity_max = 650.0
-gravity = Vector3(0, 1000, 0)
-scale_max = 1.5
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gvfoa"]
-particle_flag_disable_z = true
-direction = Vector3(0, 0, 0)
-gravity = Vector3(0, 0, 0)
-scale_min = 0.5
-scale_max = 4.0
+[ext_resource type="PackedScene" uid="uid://bqnbp2vt8d6kp" path="res://vfx/vfx_upgrade_building.tscn" id="1_q23iu"]
+[ext_resource type="PackedScene" uid="uid://dod6fvycsdd6x" path="res://vfx/vfx_star_getting.tscn" id="2_dnf66"]
+[ext_resource type="PackedScene" uid="uid://b4taahurnltb4" path="res://vfx/vfx_title_star_shining.tscn" id="3_ml0e5"]
 
 [node name="vfxs" type="Node2D"]
 
-[node name="vfx_upgradeBuilding" type="GPUParticles2D" parent="."]
-emitting = false
-amount = 32
-process_material = SubResource("ParticleProcessMaterial_qf7sc")
-texture = ExtResource("1_5eih1")
-lifetime = 0.4
-one_shot = true
-explosiveness = 1.0
+[node name="vfx_upgradeBuilding" parent="." instance=ExtResource("1_q23iu")]
 
-[node name="vfx_starGetting" type="GPUParticles2D" parent="."]
-emitting = false
-amount = 48
-process_material = SubResource("ParticleProcessMaterial_krfax")
-texture = ExtResource("2_6o2v8")
-lifetime = 0.4
-one_shot = true
-explosiveness = 0.75
+[node name="vfx_starGetting" parent="." instance=ExtResource("2_dnf66")]
 
-[node name="vfx_titleStarShining" type="GPUParticles2D" parent="."]
-amount = 12
-process_material = SubResource("ParticleProcessMaterial_gvfoa")
-texture = ExtResource("3_y1fno")
-lifetime = 0.5
+[node name="vfx_titleStarShining" parent="." instance=ExtResource("3_ml0e5")]

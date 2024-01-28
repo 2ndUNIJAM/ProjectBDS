@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class SceneManager : Node
 {
@@ -12,8 +13,7 @@ public partial class SceneManager : Node
 	[Export]
 	string[] MapPaths = new string[6];
 
-	[Export]
-	AudioStream BackgroundMusic;
+	AudioStreamPlayer BackgroundMusicPlayer;
 
 	string _MapPath;
 
@@ -47,5 +47,8 @@ public partial class SceneManager : Node
 	public override void _Ready()
 	{
 		_MapPath = MapPaths[0];
+/*		BackgroundMusicPlayer = GetNode<AudioStreamPlayer>("../SceneManager/BackgroundMusicPlayer");
+		Debug.Assert(BackgroundMusicPlayer == null);
+        BackgroundMusicPlayer.Play();*/
 	}
 }

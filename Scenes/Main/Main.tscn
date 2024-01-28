@@ -30,6 +30,9 @@ position = Vector2(640, 360)
 script = ExtResource("2_b6ynt")
 JsonMapPath = "res://map.json"
 
+[node name="Evaluator" type="Node" parent="."]
+script = ExtResource("6_pp8jg")
+
 [node name="StateController" type="Node" parent="."]
 script = ExtResource("3_hpcr6")
 
@@ -38,9 +41,6 @@ viewer = NodePath("../TileMap")
 
 [node name="Inventory" parent="." node_paths=PackedStringArray("InputNode") instance=ExtResource("5_66ouf")]
 InputNode = NodePath("../Input")
-
-[node name="Evaluator" type="Node" parent="."]
-script = ExtResource("6_pp8jg")
 
 [node name="ScoreUI" type="Node2D" parent="."]
 

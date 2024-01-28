@@ -15,7 +15,9 @@ script = ExtResource("1_b8ueq")
 StageSelectScene = ExtResource("2_27by0")
 MainScene = ExtResource("3_degxc")
 MapPaths = PackedStringArray("res://Maps/stage1.json", "res://Maps/stage2.json", "res://Maps/stage3.json", "res://Maps/stage4.json", "res://Maps/stage5.json", "res://Maps/stage6.json")
-BackgroundMusic = ExtResource("4_e04cl")
+
+[node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="SceneManager"]
+stream = ExtResource("4_e04cl")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

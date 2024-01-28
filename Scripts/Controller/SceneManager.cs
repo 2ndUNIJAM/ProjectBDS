@@ -29,18 +29,21 @@ public partial class SceneManager : Node
 	public void LoadStage(int stage)
 	{
 		_MapPath = MapPaths[stage];
+		GetNode<AudioStreamPlayer>("/root/SceneManager/ClickSound").Play();
 		GetTree().ChangeSceneToPacked(MainScene);
 		
 	}
 
 	public void Replay()
 	{
+		GetNode<AudioStreamPlayer>("/root/SceneManager/ClickSound").Play();
 		GetTree().ChangeSceneToPacked(MainScene);
 		
 	}
 
 	public void StageSelect()
 	{
+		GetNode<AudioStreamPlayer>("/root/SceneManager/ClickSound").Play();
 		GetTree().ChangeSceneToPacked(StageSelectScene);
 		
 	}

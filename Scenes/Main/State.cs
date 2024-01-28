@@ -12,6 +12,9 @@ public partial class State : Node
 	public Grab Grab { get; set; }
 	[Export]
 	string JsonMapPath;
+
+	private int _MaxScore;
+	public int MaxScore { get => _MaxScore; }
 	public override void _Ready()
 	{
 		Inventory = new Inventory();
@@ -19,7 +22,7 @@ public partial class State : Node
 		Grid = new Grid();
 		SceneManager sceneManager = GetNode("/root/SceneManager") as SceneManager;
 		if (sceneManager != null )
-		TileHandler.PopulateMapWithJson(Grid, Inventory, sceneManager.MapPath);
+		_MaxScore = TileHandler.PopulateMapWithJson(Grid, Inventory, sceneManager.MapPath);
 	}
 
 }

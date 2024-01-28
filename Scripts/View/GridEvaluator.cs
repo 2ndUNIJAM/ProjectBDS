@@ -7,8 +7,10 @@ public partial class GridEvaluator : Node
 	int[] dx = { 0, 0, -1, 1 };
 	int[] dy = { -1, 1, 0, 0 };
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+    public int totalComboScore = 0;
+
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
 	{
 
 	}
@@ -237,7 +239,8 @@ public partial class GridEvaluator : Node
 	
 	void UpdateScoreBoardView(bool isEdgeConditionCorrect, List<List<Vector2I>> comboList)
 	{
-		int totalComboScore = 0;
+		totalComboScore = 0;
+		//int totalComboScore = 0;
 		for(int i=0; i<comboList.Count; i++)
 		{
 			int comboCount = comboList[i].Count;

@@ -24,14 +24,36 @@ public partial class ResultPage: Control
 
 	void GameOver()
 	{
-		GD.Print("over here");
-		Control myInventory = GetNode<Control>("../Inventory");
-		myInventory.Visible = false;
-		Control myResult = GetNode<Control>("../Result");
-		myResult.Visible = true;
+		GridEvaluator myGridEvaluator = GetNode<GridEvaluator>("../../Evaluator");
+		int totalScore = myGridEvaluator.totalComboScore;
+        State myState = GetNode<State>("../../State");
+        int maxScore = myState.MaxScore;
 
-		SetResult(0);
-	}
+		GD.Print("total score: " + totalScore);
+		GD.Print("max score: " + maxScore);
+
+        if (totalScore < maxScore * 0.33)
+		{
+            SetResult(0);
+        }
+		else if (totalScore < maxScore * 0.66)
+		{
+            SetResult(1);
+        }
+		else if (totalScore < maxScore)
+		{
+            SetResult(2);
+        }
+		else
+		{
+            SetResult(3);
+        }
+
+        Control myInventory = GetNode<Control>("../Inventory");
+        myInventory.Visible = false;
+        Control myResult = GetNode<Control>("../Result");
+        myResult.Visible = true;
+    }
 
 	public void SetResult(int grade)
 	{

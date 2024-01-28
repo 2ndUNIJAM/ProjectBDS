@@ -1,6 +1,7 @@
 {
     "width": 4,
     "height": 3,
+    "max": 54,
     "tiles": [
         {
             "node": 1,

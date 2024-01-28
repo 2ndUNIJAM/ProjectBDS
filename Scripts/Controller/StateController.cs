@@ -19,11 +19,12 @@ public partial class StateController : Node
 
     public override void _Process(double delta)
     {
-        if (!bOnIntialize)
+/*        if (!bOnIntialize)
         {
-            bOnIntialize = true;
+            bOnIntialize = false;
             EmitSignal(SignalName.OnStateUpdate, state, Vector2I.Zero);
-        }
+        }*/
+        EmitSignal(SignalName.OnStateUpdate, state, Vector2I.Zero);
     }
     public void GrabGridSelect(Vector2I target)
     {
@@ -42,7 +43,7 @@ public partial class StateController : Node
 
 	public void GrabInventorySelect(int index)
 	{
-        GD.Print($"{state.Inventory.Tiles.ElementAt<Tile>(index).atlas_coord}");
+        //GD.Print($"{state.Inventory.Tiles.ElementAt<Tile>(index).atlas_coord}");
 		TileHandler.AddInventoryGrab(state.Grab, index);
 		EmitSignal(SignalName.OnStateUpdate, state, Vector2I.Zero);
 	}

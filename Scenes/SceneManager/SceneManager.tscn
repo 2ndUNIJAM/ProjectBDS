@@ -1,11 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://cf2gfth6x6hfg"]
+[gd_scene load_steps=6 format=3 uid="uid://cf2gfth6x6hfg"]
 
 [ext_resource type="Script" path="res://Scripts/Controller/SceneManager.cs" id="1_67e8g"]
 [ext_resource type="PackedScene" uid="uid://257u5fcoumtk" path="res://Scenes/StageSelect/StageSelect.tscn" id="2_ej2v3"]
 [ext_resource type="PackedScene" uid="uid://bmu0yx4fvuqpk" path="res://Scenes/Main/Main.tscn" id="3_jvrf0"]
+[ext_resource type="AudioStream" uid="uid://paec76jyie4t" path="res://Sound/click_sound.mp3" id="4_vq2x2"]
+[ext_resource type="AudioStream" uid="uid://dcvmra4uuljt3" path="res://Sound/BackgroundMusic.mp3" id="5_i1ys2"]
 
 [node name="SceneManager" type="Node"]
 script = ExtResource("1_67e8g")
 StageSelectScene = ExtResource("2_ej2v3")
 MainScene = ExtResource("3_jvrf0")
 MapPaths = PackedStringArray("res://Maps/stage1.json", "res://Maps/stage2.json", "res://Maps/stage3.json", "res://Maps/stage4.json", "res://Maps/stage5.json", "res://Maps/stage6.json")
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_vq2x2")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_i1ys2")
+autoplay = true

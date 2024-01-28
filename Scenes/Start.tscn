@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ddbmrdsaow7ac"]
+[gd_scene load_steps=11 format=3 uid="uid://ddbmrdsaow7ac"]
 
 [ext_resource type="Script" path="res://Scripts/Controller/SceneManager.cs" id="1_b8ueq"]
 [ext_resource type="PackedScene" uid="uid://257u5fcoumtk" path="res://Scenes/StageSelect/StageSelect.tscn" id="2_27by0"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://b1q051pb5m6qf" path="res://Sprites/title.png" id="4_j7g1d"]
 [ext_resource type="Texture2D" uid="uid://crcaoo78xhl3p" path="res://Sprites/start_button_1.png" id="5_2mvqy"]
 [ext_resource type="Texture2D" uid="uid://cqi3x0h1xiklr" path="res://Sprites/start_button_2.png" id="6_u18kt"]
+[ext_resource type="Texture2D" uid="uid://byrt06guxi1s2" path="res://Sprites/tutorialimg.png" id="8_o7pyy"]
+[ext_resource type="Texture2D" uid="uid://bhg1sg682ypdj" path="res://Sprites/questionmark.png" id="9_cp6i6"]
+[ext_resource type="Script" path="res://Scripts/InfoButton.cs" id="9_tgo22"]
 
 [node name="Start" type="Node2D"]
 
@@ -41,5 +44,27 @@ layout_mode = 2
 layout_mode = 2
 texture_normal = ExtResource("5_2mvqy")
 texture_pressed = ExtResource("6_u18kt")
+
+[node name="Tutorialimg" type="Sprite2D" parent="CanvasLayer"]
+visible = false
+position = Vector2(640, 364)
+scale = Vector2(1.00624, 1.01528)
+texture = ExtResource("8_o7pyy")
+
+[node name="InfoButton" type="TextureButton" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 529.0
+offset_top = -95.0
+offset_right = 889.0
+offset_bottom = 265.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.2, 0.2)
+texture_normal = ExtResource("9_cp6i6")
+script = ExtResource("9_tgo22")
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/CenterContainer2/TextureButton" to="SceneManager" method="StageSelect"]

@@ -34,7 +34,7 @@ public partial class GridViewer : TileMap
 				}
                 PlaceRoad(grid, new Vector2I(j, i));
                 SetTileInTileMap(tile.tile_layer, newPos, tile.source_id, tile.atlas_coord);
-				GD.Print(tile.atlas_coord);
+				//GD.Print(tile.atlas_coord);
 			}
 		}
 	}

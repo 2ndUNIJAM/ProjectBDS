@@ -31,6 +31,7 @@ public partial class GridEvaluator : Node
 	
 	public bool InternalEvaluationEdgeCondition(Grid grid) // 엣지체킹함수
 	{
+		bool bHasTile = false;
 		for(int i = 0; i<grid.Tiles.Count; i++) 
 		{
 			for(int j = 0; j<grid.Tiles[i].Count; j++)
@@ -42,17 +43,64 @@ public partial class GridEvaluator : Node
 				{
 					continue;
 				}
-				// 위쪽 확인
-				bool isUpInvalid = !(i > 0 && grid.Tiles[i - 1][j] != null && grid.Tiles[i][j].North != grid.Tiles[i - 1][j].South) || grid.Tiles[i][j].North == EdgeType.DisConnected;
+				bHasTile = true;
+
+				// 경우의수
+				// 1. 타일이 있고 서로 같은 도로 -> 연결
+				// 2. 타일이 있고 서로 다른 도로 -> 비연결
+				// 3. 타일이 없고 내 도로도 없음 -> 연결
+				// 4, 타일이 없고 내 도로는 있음 -> 비연결
+
+				bool isUpInvalid, isDownInvalid, isLeftInvalid, isRightInvalid;
+
+				if(i>0 && grid.Tiles[i - 1][j] != null) // 타일이 있고
+				{
+                    isUpInvalid = (grid.Tiles[i][j].North != grid.Tiles[i - 1][j].South); // 서로 같은 타입 도로인지(연결 연결, 비연결 비연결)
+                }
+				else // 타일이 없고
+				{
+                    isUpInvalid = (grid.Tiles[i][j].North != EdgeType.DisConnected); // 내 도로가 없는지
+                }
+
+                if (i < grid.Tiles.Count - 1 && grid.Tiles[i + 1][j] != null)
+                {
+                    isDownInvalid = (grid.Tiles[i][j].South != grid.Tiles[i + 1][j].North);
+                }
+                else
+                {
+                    isDownInvalid = (grid.Tiles[i][j].South != EdgeType.DisConnected);
+                }
+
+                if (j > 0 && grid.Tiles[i][j-1] != null)
+                {
+                    isLeftInvalid = (grid.Tiles[i][j].West != grid.Tiles[i][j-1].East);
+                }
+                else
+                {
+                    isLeftInvalid = (grid.Tiles[i][j].West != EdgeType.DisConnected);
+                }
+
+                if (j < grid.Tiles[i].Count - 1 && grid.Tiles[i][j+1] != null)
+                {
+                    isRightInvalid = (grid.Tiles[i][j].East != grid.Tiles[i][j+1].West);
+                }
+                else
+                {
+                    isRightInvalid = (grid.Tiles[i][j].East != EdgeType.DisConnected);
+                }
+
+                // 
+                // 위쪽 확인
+                //bool isUpInvalid = !(i > 0 && grid.Tiles[i - 1][j] != null && grid.Tiles[i][j].North != grid.Tiles[i - 1][j].South) || !(i==0 || (i>0 && grid.Tiles[i-1][j]==null && grid.Tiles[i][j].North == EdgeType.DisConnected));
 				GD.Print(isUpInvalid);
 				// 아래쪽 확인
-				bool isDownInvalid = !(i < grid.Tiles.Count-1 && grid.Tiles[i + 1][j] != null && grid.Tiles[i][j].South != grid.Tiles[i + 1][j].North) || grid.Tiles[i][j].South == EdgeType.DisConnected;
+				//bool isDownInvalid = !(i < grid.Tiles.Count-1 && grid.Tiles[i + 1][j] != null && grid.Tiles[i][j].South != grid.Tiles[i + 1][j].North) && !(grid.Tiles[i][j].South == EdgeType.DisConnected);
 				GD.Print(isDownInvalid);
 				// 왼쪽 확인
-				bool isLeftInvalid = !(j > 0 && grid.Tiles[i][j - 1] != null && grid.Tiles[i][j].West != grid.Tiles[i][j - 1].East) || grid.Tiles[i][j].West == EdgeType.DisConnected;
+				//bool isLeftInvalid = !(j > 0 && grid.Tiles[i][j - 1] != null && grid.Tiles[i][j].West != grid.Tiles[i][j - 1].East) && !(grid.Tiles[i][j].West == EdgeType.DisConnected);
 				GD.Print(isLeftInvalid);
 				// 오른쪽 확인
-				bool isRightInvalid = !(j < grid.Tiles[i].Count-1 && grid.Tiles[i][j + 1] != null && grid.Tiles[i][j].East != grid.Tiles[i][j + 1].West) || grid.Tiles[i][j].East == EdgeType.DisConnected;
+				//bool isRightInvalid = !(j < grid.Tiles[i].Count-1 && grid.Tiles[i][j + 1] != null && grid.Tiles[i][j].East != grid.Tiles[i][j + 1].West) && !(grid.Tiles[i][j].East == EdgeType.DisConnected);
 				GD.Print(isRightInvalid);
 
 				if (isUpInvalid || isDownInvalid || isLeftInvalid || isRightInvalid) 
@@ -61,7 +109,7 @@ public partial class GridEvaluator : Node
 				}
 			}
 		}
-		return true;
+		return (bHasTile);
 	}
 
 	public List<List<Vector2I>> InternalEvaluateCombo(Grid grid) //콤보체킹함수

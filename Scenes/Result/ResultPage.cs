@@ -26,34 +26,34 @@ public partial class ResultPage: Control
 	{
 		GridEvaluator myGridEvaluator = GetNode<GridEvaluator>("../../Evaluator");
 		int totalScore = myGridEvaluator.totalComboScore;
-        State myState = GetNode<State>("../../State");
-        int maxScore = myState.MaxScore;
+		State myState = GetNode<State>("../../State");
+		int maxScore = myState.MaxScore;
 
 		GD.Print("total score: " + totalScore);
 		GD.Print("max score: " + maxScore);
 
-        if (totalScore < maxScore * 0.33)
+		if (totalScore < maxScore * 0.33)
 		{
-            SetResult(0);
-        }
+			SetResult(0);
+		}
 		else if (totalScore < maxScore * 0.66)
 		{
-            SetResult(1);
-        }
+			SetResult(1);
+		}
 		else if (totalScore < maxScore)
 		{
-            SetResult(2);
-        }
+			SetResult(2);
+		}
 		else
 		{
-            SetResult(3);
-        }
+			SetResult(3);
+		}
 
-        Control myInventory = GetNode<Control>("../Inventory");
-        myInventory.Visible = false;
-        Control myResult = GetNode<Control>("../Result");
-        myResult.Visible = true;
-    }
+		Control myInventory = GetNode<Control>("../Inventory");
+		myInventory.Visible = false;
+		Control myResult = GetNode<Control>("../Result");
+		myResult.Visible = true;
+	}
 
 	public void SetResult(int grade)
 	{
@@ -65,6 +65,9 @@ public partial class ResultPage: Control
 
 		TextureRect stamp = GetNode<TextureRect>("%Stamp");
 		stamp.Texture = Stamps[grade];
+
+		AudioStreamPlayer audio = GetNode<AudioStreamPlayer>("StampSound");
+		audio.Play();
 
 		GetNode<TextureButton>("%PlayButton").Visible = !GetNode<SceneManager>("/root/SceneManager").IsMaxStage();
 	}

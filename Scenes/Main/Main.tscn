@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bmu0yx4fvuqpk"]
+[gd_scene load_steps=15 format=3 uid="uid://bmu0yx4fvuqpk"]
 
 [ext_resource type="PackedScene" uid="uid://bv12jevebwfge" path="res://Scenes/Main/Map.tscn" id="1_2mq06"]
 [ext_resource type="Texture2D" uid="uid://cofktos6xgtsw" path="res://Scenes/Main/bg_desk.png" id="1_fidjh"]
@@ -11,6 +11,7 @@
 [ext_resource type="FontFile" uid="uid://cupgua3esm0ts" path="res://Font/DOSGothic.ttf" id="8_3x48k"]
 [ext_resource type="Script" path="res://Scenes/Main/ScoreLabel.cs" id="9_pvq1e"]
 [ext_resource type="Texture2D" uid="uid://1jfe0plnfv6y" path="res://Sprites/spr_bt_submit.png" id="9_vtj8w"]
+[ext_resource type="PackedScene" uid="uid://dod6fvycsdd6x" path="res://vfx/vfx_star_getting.tscn" id="10_gwn2b"]
 [ext_resource type="PackedScene" uid="uid://bsynjat4p2v62" path="res://Scenes/Result/Result.tscn" id="10_ot8bw"]
 [ext_resource type="Texture2D" uid="uid://detyygn24n8xl" path="res://Sprites/spr_bt_submit_pushed.png" id="10_vlekj"]
 
@@ -101,6 +102,9 @@ text = "100억원"
 text_direction = 1
 script = ExtResource("9_pvq1e")
 speed = 50.0
+
+[node name="vfx_starGetting" parent="HUD/Score" instance=ExtResource("10_gwn2b")]
+position = Vector2(67, 50)
 
 [node name="Result" parent="HUD" instance=ExtResource("10_ot8bw")]
 visible = false

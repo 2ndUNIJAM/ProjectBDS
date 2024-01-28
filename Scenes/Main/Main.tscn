@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bmu0yx4fvuqpk"]
+[gd_scene load_steps=12 format=3 uid="uid://bmu0yx4fvuqpk"]
 
 [ext_resource type="PackedScene" uid="uid://bv12jevebwfge" path="res://Scenes/Main/Map.tscn" id="1_2mq06"]
 [ext_resource type="Texture2D" uid="uid://cofktos6xgtsw" path="res://Scenes/Main/bg_desk.png" id="1_fidjh"]
@@ -8,12 +8,48 @@
 [ext_resource type="PackedScene" uid="uid://duhffdexnc71q" path="res://Scenes/Inventory/Inventory.tscn" id="5_66ouf"]
 [ext_resource type="Script" path="res://Scripts/View/GridEvaluator.cs" id="6_pp8jg"]
 [ext_resource type="Texture2D" uid="uid://d0e64kib72ive" path="res://Sprites/bg_main.png" id="7_sk7yl"]
-[ext_resource type="PackedScene" uid="uid://bsynjat4p2v62" path="res://Scenes/Result/Result.tscn" id="9_k6xqt"]
+[ext_resource type="Texture2D" uid="uid://1jfe0plnfv6y" path="res://Sprites/spr_bt_submit.png" id="9_vtj8w"]
+[ext_resource type="PackedScene" uid="uid://bsynjat4p2v62" path="res://Scenes/Result/Result.tscn" id="10_ot8bw"]
+[ext_resource type="Texture2D" uid="uid://detyygn24n8xl" path="res://Sprites/spr_bt_submit_pushed.png" id="10_vlekj"]
 
 [node name="Main" type="Node2D"]
 
-[node name="DeskBackground" type="Sprite2D" parent="."]
+[node name="Backgrounds" type="Node2D" parent="."]
+
+[node name="DeskBackground7" type="Sprite2D" parent="Backgrounds"]
+position = Vector2(1920, -360)
+texture = ExtResource("1_fidjh")
+
+[node name="DeskBackground8" type="Sprite2D" parent="Backgrounds"]
+position = Vector2(640, -360)
+texture = ExtResource("1_fidjh")
+
+[node name="DeskBackground9" type="Sprite2D" parent="Backgrounds"]
+position = Vector2(-640, -360)
+texture = ExtResource("1_fidjh")
+
+[node name="DeskBackground4" type="Sprite2D" parent="Backgrounds"]
+position = Vector2(1920, 1080)
+texture = ExtResource("1_fidjh")
+
+[node name="DeskBackground5" type="Sprite2D" parent="Backgrounds"]
+position = Vector2(640, 1080)
+texture = ExtResource("1_fidjh")
+
+[node name="DeskBackground6" type="Sprite2D" parent="Backgrounds"]
+position = Vector2(-640, 1080)
+texture = ExtResource("1_fidjh")
+
+[node name="DeskBackground3" type="Sprite2D" parent="Backgrounds"]
+position = Vector2(1920, 360)
+texture = ExtResource("1_fidjh")
+
+[node name="DeskBackground2" type="Sprite2D" parent="Backgrounds"]
 position = Vector2(640, 360)
+texture = ExtResource("1_fidjh")
+
+[node name="DeskBackground" type="Sprite2D" parent="Backgrounds"]
+position = Vector2(-640, 360)
 texture = ExtResource("1_fidjh")
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -31,14 +67,14 @@ position = Vector2(640, 360)
 script = ExtResource("2_b6ynt")
 JsonMapPath = "res://map.json"
 
-[node name="Evaluator" type="Node" parent="."]
-script = ExtResource("6_pp8jg")
-
 [node name="StateController" type="Node" parent="."]
 script = ExtResource("3_hpcr6")
 
 [node name="Input" parent="." node_paths=PackedStringArray("viewer") instance=ExtResource("4_ww7tm")]
 viewer = NodePath("../TileMap")
+
+[node name="Evaluator" type="Node" parent="."]
+script = ExtResource("6_pp8jg")
 
 [node name="ScoreUI" type="Node2D" parent="."]
 
@@ -53,17 +89,29 @@ offset_bottom = 23.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 20
 
+[node name="Result" parent="HUD" instance=ExtResource("10_ot8bw")]
+visible = false
+
 [node name="Inventory" parent="HUD" node_paths=PackedStringArray("InputNode") instance=ExtResource("5_66ouf")]
 InputNode = NodePath("../../Input")
 
-[node name="Result" parent="HUD" instance=ExtResource("9_k6xqt")]
-visible = false
-
-[node name="Submit" type="Button" parent="HUD"]
-offset_left = 23.0
-offset_top = 16.0
-offset_right = 135.0
-offset_bottom = 56.0
+[node name="Submit" type="TextureButton" parent="HUD/Inventory"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 162.0
+offset_top = 650.0
+offset_right = 282.0
+offset_bottom = 710.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("9_vtj8w")
+texture_pressed = ExtResource("10_vlekj")
+ignore_texture_size = true
+stretch_mode = 0
 
 [connection signal="OnStateUpdate" from="StateController" to="TileMap" method="UpdateGridView"]
 [connection signal="OnStateUpdate" from="StateController" to="Evaluator" method="UpdateGridEvaluationView"]
@@ -71,3 +119,4 @@ offset_bottom = 56.0
 [connection signal="OnGrabGrid" from="Input" to="StateController" method="GrabGridSelect"]
 [connection signal="OnGrabInventory" from="Input" to="StateController" method="GrabInventorySelect"]
 [connection signal="OnGridTileRemove" from="Input" to="StateController" method="GridTileRemove"]
+[connection signal="button_up" from="HUD/Inventory/Submit" to="HUD/Result" method="GameOver"]

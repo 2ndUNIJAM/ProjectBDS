@@ -27,7 +27,7 @@ public partial class GridEvaluator : Node
 			GD.Print("");
 		}
 		UpdateScoreBoardView(bPass, comboList);
-    }
+	}
 	
 	public bool InternalEvaluationEdgeCondition(Grid grid) // 엣지체킹함수
 	{
@@ -55,43 +55,43 @@ public partial class GridEvaluator : Node
 
 				if(i>0 && grid.Tiles[i - 1][j] != null) // 타일이 있고
 				{
-                    isUpInvalid = (grid.Tiles[i][j].North != grid.Tiles[i - 1][j].South); // 서로 같은 타입 도로인지(연결 연결, 비연결 비연결)
-                }
+					isUpInvalid = (grid.Tiles[i][j].North != grid.Tiles[i - 1][j].South); // 서로 같은 타입 도로인지(연결 연결, 비연결 비연결)
+				}
 				else // 타일이 없고
 				{
-                    isUpInvalid = (grid.Tiles[i][j].North != EdgeType.DisConnected); // 내 도로가 없는지
-                }
+					isUpInvalid = (grid.Tiles[i][j].North != EdgeType.DisConnected); // 내 도로가 없는지
+				}
 
-                if (i < grid.Tiles.Count - 1 && grid.Tiles[i + 1][j] != null)
-                {
-                    isDownInvalid = (grid.Tiles[i][j].South != grid.Tiles[i + 1][j].North);
-                }
-                else
-                {
-                    isDownInvalid = (grid.Tiles[i][j].South != EdgeType.DisConnected);
-                }
+				if (i < grid.Tiles.Count - 1 && grid.Tiles[i + 1][j] != null)
+				{
+					isDownInvalid = (grid.Tiles[i][j].South != grid.Tiles[i + 1][j].North);
+				}
+				else
+				{
+					isDownInvalid = (grid.Tiles[i][j].South != EdgeType.DisConnected);
+				}
 
-                if (j > 0 && grid.Tiles[i][j-1] != null)
-                {
-                    isLeftInvalid = (grid.Tiles[i][j].West != grid.Tiles[i][j-1].East);
-                }
-                else
-                {
-                    isLeftInvalid = (grid.Tiles[i][j].West != EdgeType.DisConnected);
-                }
+				if (j > 0 && grid.Tiles[i][j-1] != null)
+				{
+					isLeftInvalid = (grid.Tiles[i][j].West != grid.Tiles[i][j-1].East);
+				}
+				else
+				{
+					isLeftInvalid = (grid.Tiles[i][j].West != EdgeType.DisConnected);
+				}
 
-                if (j < grid.Tiles[i].Count - 1 && grid.Tiles[i][j+1] != null)
-                {
-                    isRightInvalid = (grid.Tiles[i][j].East != grid.Tiles[i][j+1].West);
-                }
-                else
-                {
-                    isRightInvalid = (grid.Tiles[i][j].East != EdgeType.DisConnected);
-                }
+				if (j < grid.Tiles[i].Count - 1 && grid.Tiles[i][j+1] != null)
+				{
+					isRightInvalid = (grid.Tiles[i][j].East != grid.Tiles[i][j+1].West);
+				}
+				else
+				{
+					isRightInvalid = (grid.Tiles[i][j].East != EdgeType.DisConnected);
+				}
 
-                // 
-                // 위쪽 확인
-                //bool isUpInvalid = !(i > 0 && grid.Tiles[i - 1][j] != null && grid.Tiles[i][j].North != grid.Tiles[i - 1][j].South) || !(i==0 || (i>0 && grid.Tiles[i-1][j]==null && grid.Tiles[i][j].North == EdgeType.DisConnected));
+				// 
+				// 위쪽 확인
+				//bool isUpInvalid = !(i > 0 && grid.Tiles[i - 1][j] != null && grid.Tiles[i][j].North != grid.Tiles[i - 1][j].South) || !(i==0 || (i>0 && grid.Tiles[i-1][j]==null && grid.Tiles[i][j].North == EdgeType.DisConnected));
 				GD.Print(isUpInvalid);
 				// 아래쪽 확인
 				//bool isDownInvalid = !(i < grid.Tiles.Count-1 && grid.Tiles[i + 1][j] != null && grid.Tiles[i][j].South != grid.Tiles[i + 1][j].North) && !(grid.Tiles[i][j].South == EdgeType.DisConnected);
@@ -155,17 +155,17 @@ public partial class GridEvaluator : Node
 					
 					if (newCombo.Count>1)  //더 이상 새로 콤보 추가할 후보가 없다면..
 					{
-                        for (int l = 0; l < newCombo.Count; l++)
-                        {
-                           // GD.Print(newCombo[l].X + " " + newCombo[l].Y);
-                            comboList[curComboGroup].Add(newCombo[l]); //추가된 콤보를 확정 배열로 집어넣기
-                            isNodeChecked[newCombo[l].Y, newCombo[l].X] = true; //체킹 true로 설정
-                        }
-                        curComboGroup++; // 다음콤보 체킹으로 넘어가기
-                        comboList.Add(new List<Vector2I>()); // 다음콤보 리스트 미리 만들어두기
-                        //GD.Print("");
-                        //break;
-                    }
+						for (int l = 0; l < newCombo.Count; l++)
+						{
+						   // GD.Print(newCombo[l].X + " " + newCombo[l].Y);
+							comboList[curComboGroup].Add(newCombo[l]); //추가된 콤보를 확정 배열로 집어넣기
+							isNodeChecked[newCombo[l].Y, newCombo[l].X] = true; //체킹 true로 설정
+						}
+						curComboGroup++; // 다음콤보 체킹으로 넘어가기
+						comboList.Add(new List<Vector2I>()); // 다음콤보 리스트 미리 만들어두기
+						//GD.Print("");
+						//break;
+					}
 				}
 			}
 			for(int i = 0; i < height; i++)
@@ -245,14 +245,11 @@ public partial class GridEvaluator : Node
 			totalComboScore += comboPower;
 		}
 
-		GD.Print("Edge condition is "+isEdgeConditionCorrect+"\nTotal Combo is "+totalComboScore);
-        Label myScoreLabel = GetNode<Label>("../HUD/Score");
+		Label myScoreLabel = GetNode<Label>("../HUD/Score");
 
-		String EdgeCondition = null;
-		if (isEdgeConditionCorrect) EdgeCondition = "SOLVED";
-		else EdgeCondition = "WRONG";
-		myScoreLabel.Text = "This puzzle is currently: " + EdgeCondition + "\nScore: " + totalComboScore;
-    }
+		myScoreLabel.Text = $"{totalComboScore * totalComboScore}억원";
+		GetNode<TextureButton>("../HUD/Inventory/Submit").Visible = isEdgeConditionCorrect;
+	}
 
 	List<Vector2I> BFS(int x, int y, Grid grid, ref bool[,] isVisited)
 	{
@@ -266,78 +263,78 @@ public partial class GridEvaluator : Node
 
 		Queue<Vector2I> q = new Queue<Vector2I>();
 		q.Enqueue(new Vector2I(x, y));
-        //isVisited[y,x] = true;
+		//isVisited[y,x] = true;
 		ComboList.Add(new Vector2I(x, y));
 		while(q.Count > 0)
 		{
 			//GD.Print("q count is "+q.Count);
-            Vector2I curPos;
+			Vector2I curPos;
 			q.TryDequeue(out curPos);
 			//GD.Print(curPos);
-            Tile curTile = grid.Tiles[curPos.Y][curPos.X];
-            for (int i=0; i<4; i++)
+			Tile curTile = grid.Tiles[curPos.Y][curPos.X];
+			for (int i=0; i<4; i++)
 			{
 				if (curTile == null) break;
-                //bool check = false;
-                int nx = curPos.X + dx[i];
+				//bool check = false;
+				int nx = curPos.X + dx[i];
 				int ny = curPos.Y + dy[i];
 
 				if(nx>=0 && ny>=0 && nx<width && ny<height && !isVisited[ny,nx])
 				{
-                    if (grid.Tiles[ny][nx] == null) continue;
-                    if (i == 0) //상
-                    {
-                        if(curTile.North == grid.Tiles[ny][nx].South && curTile.North == EdgeType.Connected && curTile.Node == grid.Tiles[ny][nx].Node)
+					if (grid.Tiles[ny][nx] == null) continue;
+					if (i == 0) //상
+					{
+						if(curTile.North == grid.Tiles[ny][nx].South && curTile.North == EdgeType.Connected && curTile.Node == grid.Tiles[ny][nx].Node)
 						{
-                            ComboList.Add(new Vector2I(nx, ny));
-                            q.Enqueue(new Vector2I(nx, ny));
+							ComboList.Add(new Vector2I(nx, ny));
+							q.Enqueue(new Vector2I(nx, ny));
 							isVisited[ny, nx] = true;
-                        }
-                            
-                    }
+						}
+							
+					}
 					if (i == 1) //하
 					{
-                        if (curTile.South == grid.Tiles[ny][nx].North && curTile.South == EdgeType.Connected && curTile.Node == grid.Tiles[ny][nx].Node)
-                        {
-                            ComboList.Add(new Vector2I(nx, ny));
-                            q.Enqueue(new Vector2I(nx, ny));
-                            isVisited[ny, nx] = true;
-                        }
-                    }
+						if (curTile.South == grid.Tiles[ny][nx].North && curTile.South == EdgeType.Connected && curTile.Node == grid.Tiles[ny][nx].Node)
+						{
+							ComboList.Add(new Vector2I(nx, ny));
+							q.Enqueue(new Vector2I(nx, ny));
+							isVisited[ny, nx] = true;
+						}
+					}
 					if (i == 2) //좌
 					{
 						if (curTile.West == grid.Tiles[ny][nx].East && curTile.West == EdgeType.Connected && curTile.Node == grid.Tiles[ny][nx].Node)
-                        {
-                            ComboList.Add(new Vector2I(nx, ny));
-                            q.Enqueue(new Vector2I(nx, ny));
-                            isVisited[ny, nx] = true;
-                        }
-                    }
+						{
+							ComboList.Add(new Vector2I(nx, ny));
+							q.Enqueue(new Vector2I(nx, ny));
+							isVisited[ny, nx] = true;
+						}
+					}
 					if (i == 3) //우
 					{
 						if (curTile.East == grid.Tiles[ny][nx].West && curTile.East == EdgeType.Connected && curTile.Node == grid.Tiles[ny][nx].Node)
-                        {
-                            ComboList.Add(new Vector2I(nx, ny));
-                            q.Enqueue(new Vector2I(nx, ny));
-                            isVisited[ny, nx] = true;
-                        }
-                    }
+						{
+							ComboList.Add(new Vector2I(nx, ny));
+							q.Enqueue(new Vector2I(nx, ny));
+							isVisited[ny, nx] = true;
+						}
+					}
 					/*
 					if (check)
 					{
-                        //GD.PrintT(nx + " " + ny);
-                        //GD.Print(curTile.East + " " + curTile.West + " " + curTile.South + " " + curTile.North);
-                        isVisited[ny, nx] = true;
+						//GD.PrintT(nx + " " + ny);
+						//GD.Print(curTile.East + " " + curTile.West + " " + curTile.South + " " + curTile.North);
+						isVisited[ny, nx] = true;
 						//ComboList.Add(new Vector2I(nx, ny));
 						GD.Print(x+", "+y+" has combo node "+nx+", " +ny);
-                        //	q.Enqueue(new Vector2I(x, y));
+						//	q.Enqueue(new Vector2I(x, y));
 						break;
 					}
 					*/
-                }
+				}
 			}
 		}
-        return ComboList;
-    }
+		return ComboList;
+	}
 }
 

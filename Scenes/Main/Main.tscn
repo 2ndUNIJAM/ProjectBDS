@@ -76,17 +76,18 @@ viewer = NodePath("../TileMap")
 [node name="Evaluator" type="Node" parent="."]
 script = ExtResource("6_pp8jg")
 
-[node name="ScoreUI" type="Node2D" parent="."]
-
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="Score" type="Label" parent="HUD"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 23.0
+offset_left = -295.0
+offset_top = 647.0
+offset_right = -154.0
+offset_bottom = 683.0
 grow_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 
 [node name="Result" parent="HUD" instance=ExtResource("10_ot8bw")]
@@ -96,6 +97,7 @@ visible = false
 InputNode = NodePath("../../Input")
 
 [node name="Submit" type="TextureButton" parent="HUD/Inventory"]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5

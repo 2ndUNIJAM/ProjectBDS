@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://nymlu6e3it7e" path="res://Scenes/Inventory/block_background.png" id="3_t60br"]
 [ext_resource type="Texture2D" uid="uid://cfve48i0hbs71" path="res://Sprites/road.png" id="5_mxnil"]
 [ext_resource type="Theme" uid="uid://bh82mxwna8mr0" path="res://Scenes/Inventory/InventoryItemTheme.tres" id="7_wgk34"]
-[ext_resource type="AudioStream" uid="uid://cjbkf152ceo75" path="res://sfx/attempt_sound_2.mp3" id="9_s5qnb"]
+[ext_resource type="AudioStream" uid="uid://vi4swssei5j8" path="res://Sound/attempt_sound_2.mp3" id="9_glwsv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8i0sc"]
 atlas = ExtResource("5_mxnil")
@@ -70,6 +70,6 @@ layout_mode = 2
 theme = ExtResource("7_wgk34")
 
 [node name="ButtonSfx" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_s5qnb")
+stream = ExtResource("9_glwsv")
 
 [connection signal="button_down" from="Button" to="." method="OnItemClickHanndler"]

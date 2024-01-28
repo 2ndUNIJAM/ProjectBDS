@@ -49,6 +49,6 @@ public partial class SceneManager : Node
 		_MapPath = MapPaths[0];
 /*		BackgroundMusicPlayer = GetNode<AudioStreamPlayer>("../SceneManager/BackgroundMusicPlayer");
 		Debug.Assert(BackgroundMusicPlayer == null);
-        BackgroundMusicPlayer.Play();*/
+		BackgroundMusicPlayer.Play();*/
 	}
 }

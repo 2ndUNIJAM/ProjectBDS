@@ -17,7 +17,8 @@ public partial class GridEvaluator : Node
 	{
 		bool bPass = InternalEvaluationEdgeCondition(state.Grid);
 		List<List<Vector2I>> comboList = InternalEvaluateCombo(state.Grid);
-		GD.Print(bPass);
+        TileHandler.UpdateComboTile(state.Grid, comboList);
+ /*       GD.Print(bPass);
 		foreach(List<Vector2I> list in comboList)
 		{
 			foreach(Vector2I item in list)
@@ -25,7 +26,7 @@ public partial class GridEvaluator : Node
 				GD.Print(item);
 			}
 			GD.Print("");
-		}
+		}*/
 		UpdateScoreBoardView(bPass, comboList);
 	}
 	
@@ -36,8 +37,8 @@ public partial class GridEvaluator : Node
 		{
 			for(int j = 0; j<grid.Tiles[i].Count; j++)
 			{
-				GD.Print("세로줄: "+grid.Tiles.Count);
-				GD.Print("가로줄: "+grid.Tiles[i].Count);
+/*				GD.Print("세로줄: "+grid.Tiles.Count);
+				GD.Print("가로줄: "+grid.Tiles[i].Count);*/
 
 				if (grid.Tiles[i][j] == null) // 현재 좌표에 타일이 놓여있을 경우
 				{
@@ -92,16 +93,16 @@ public partial class GridEvaluator : Node
 				// 
 				// 위쪽 확인
 				//bool isUpInvalid = !(i > 0 && grid.Tiles[i - 1][j] != null && grid.Tiles[i][j].North != grid.Tiles[i - 1][j].South) || !(i==0 || (i>0 && grid.Tiles[i-1][j]==null && grid.Tiles[i][j].North == EdgeType.DisConnected));
-				GD.Print(isUpInvalid);
+				//GD.Print(isUpInvalid);
 				// 아래쪽 확인
 				//bool isDownInvalid = !(i < grid.Tiles.Count-1 && grid.Tiles[i + 1][j] != null && grid.Tiles[i][j].South != grid.Tiles[i + 1][j].North) && !(grid.Tiles[i][j].South == EdgeType.DisConnected);
-				GD.Print(isDownInvalid);
+				//GD.Print(isDownInvalid);
 				// 왼쪽 확인
 				//bool isLeftInvalid = !(j > 0 && grid.Tiles[i][j - 1] != null && grid.Tiles[i][j].West != grid.Tiles[i][j - 1].East) && !(grid.Tiles[i][j].West == EdgeType.DisConnected);
-				GD.Print(isLeftInvalid);
+				//GD.Print(isLeftInvalid);
 				// 오른쪽 확인
 				//bool isRightInvalid = !(j < grid.Tiles[i].Count-1 && grid.Tiles[i][j + 1] != null && grid.Tiles[i][j].East != grid.Tiles[i][j + 1].West) && !(grid.Tiles[i][j].East == EdgeType.DisConnected);
-				GD.Print(isRightInvalid);
+				//GD.Print(isRightInvalid);
 
 				if (isUpInvalid || isDownInvalid || isLeftInvalid || isRightInvalid) 
 				{

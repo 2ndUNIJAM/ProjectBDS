@@ -4,13 +4,22 @@ using System;
 public partial class GridViewer : TileMap
 {
     int road_source_id = 2;
-    int[] road_layer = { 2, 3, 4, 5 };
+    int[] road_layer = { 3, 4, 5, 6 };
     Vector2I[] road_atlas_coords = { new Vector2I(0, 0), new Vector2I(1, 0), new Vector2I(0, 1), new Vector2I(1, 1) };
+
+	int outline_source_id = 3;
+	int outline_layer = 1;
+	Vector2I outline_atlas_coords = Vector2I.Zero;
+
+    int base_grid_source_id = 4;
+	int base_grid_layer = 0;
+	Vector2I base_grid_atlas_coords = Vector2I.Zero;
 
 	public void UpdateGridView(State state, Vector2I updatedPoint)
 	{
 		InternalUpdateGridView(state.Grid, updatedPoint);
-	}
+		SetTileOutlineInTileMap(state.Grab);
+    }
 
 	private void InternalUpdateGridView(in Grid grid, in Vector2I updatedPoint)
 	{
@@ -32,12 +41,16 @@ public partial class GridViewer : TileMap
 					}
 					continue;
 				}
+				EraseTileInTileMap(outline_layer, newPos);
                 PlaceRoad(grid, new Vector2I(j, i));
                 SetTileInTileMap(tile.tile_layer, newPos, tile.source_id, tile.atlas_coord);
-				//GD.Print(tile.atlas_coord);
-			}
+
+                SetTileInTileMap(base_grid_layer, newPos, base_grid_source_id, base_grid_atlas_coords);
+                //GD.Print(tile.atlas_coord);
+            }
 		}
-	}
+        
+    }
 	public void SetTileInTileMap(int tile_layer, Vector2I cur_tile_pos, int tile_source_id, Vector2I tile_atlas_coord)
 	{
 		SetCell(tile_layer, cur_tile_pos, tile_source_id, tile_atlas_coord);
@@ -46,6 +59,14 @@ public partial class GridViewer : TileMap
 	public void EraseTileInTileMap(int tile_layer, Vector2I cur_tile_pos)
 	{
 		EraseCell(tile_layer, cur_tile_pos);
+	}
+
+	public void SetTileOutlineInTileMap(Grab grab)
+	{
+		if (grab.GridGrab.Count > 0)
+		{
+			SetTileInTileMap(outline_layer, grab.GridGrab[0], outline_source_id, outline_atlas_coords);
+		}
 	}
 
     public void PlaceRoad(Grid grid, Vector2I target)

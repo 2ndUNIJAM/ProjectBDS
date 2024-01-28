@@ -35,7 +35,7 @@ public class Tile
         North = EdgeType.DisConnected;
         Node = NodeType.NodeType1;
 
-        tile_layer = 1;
+        tile_layer = 2;
         source_id = 1;
         atlas_coord = Vector2I.Zero;
     }

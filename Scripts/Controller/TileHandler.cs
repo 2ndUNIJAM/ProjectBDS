@@ -16,7 +16,9 @@ public partial class TileHandler : GodotObject
 			{
 				int x = grab.GridGrab[i].X;
 				int y = grab.GridGrab[i].Y;
-				inventory.Tiles.AddLast(grid.Tiles[y][x]);
+				Tile tile = grid.Tiles[y][x];
+                tile.atlas_coord.X = 0;
+                inventory.Tiles.AddLast(tile);
 				grid.Tiles[y][x] = null;
 				grab.GridGrab.RemoveAt(0);
 			}
@@ -121,7 +123,32 @@ public partial class TileHandler : GodotObject
 		grab.InventoryGrab = target;
 	}
 
-	static public Godot.Collections.Dictionary LoadJsonMapFiles(in string filePath)
+    static public void UpdateComboTile(Grid grid, List<List<Vector2I>> comboList)
+    {
+        GD.Print("Update Combo Tile");
+        foreach (List<Vector2I> list in comboList)
+        {
+            int comboLen = list.Count;
+            foreach (Vector2I item in list)
+            {
+                int newAtlasCoordsX = 0;
+                if (comboLen == 3)
+                {
+                    GD.Print("Update to Level 2");
+                    newAtlasCoordsX = 1;
+                }
+                else if (comboLen == 5)
+                {
+                    GD.Print("Update to Level 3");
+                    newAtlasCoordsX = 2;
+                }
+                grid.Tiles[item.Y][item.X].atlas_coord.X = newAtlasCoordsX;
+            }
+        }
+
+    }
+
+    static public Godot.Collections.Dictionary LoadJsonMapFiles(in string filePath)
 	{
 		using var file = FileAccess.Open(filePath, FileAccess.ModeFlags.Read);
 		if (file == null)

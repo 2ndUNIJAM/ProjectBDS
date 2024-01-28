@@ -16,8 +16,10 @@ public partial class SceneManager : Node
 	AudioStreamPlayer BackgroundMusicPlayer;
 
 	string _MapPath;
+	int _Stage;
 
 	public string MapPath { get =>_MapPath; }
+	public int Stage { get =>_Stage; }
 
 	public void LoadStage1() => LoadStage(0);
 	public void LoadStage2() => LoadStage(1);
@@ -28,7 +30,8 @@ public partial class SceneManager : Node
 
 	public void LoadStage(int stage)
 	{
-		_MapPath = MapPaths[stage];
+		_Stage = stage;
+		_MapPath = MapPaths[Stage];
 		GetNode<AudioStreamPlayer>("/root/SceneManager/ClickSound").Play();
 		GetTree().ChangeSceneToPacked(MainScene);
 		
@@ -40,6 +43,16 @@ public partial class SceneManager : Node
 		GetTree().ChangeSceneToPacked(MainScene);
 		
 	}
+	public void NextStage()
+	{
+		GetNode<AudioStreamPlayer>("/root/SceneManager/ClickSound").Play();
+		++_Stage;
+		_MapPath = MapPaths[Stage];
+		GetTree().ChangeSceneToPacked(MainScene);
+		
+	}
+
+	public bool IsMaxStage() => _Stage == (MapPaths.Length - 1);
 
 	public void StageSelect()
 	{

@@ -80,6 +80,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="StageSelectButton" type="TextureButton" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/CenterContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_st6hf")
@@ -89,6 +90,7 @@ texture_pressed = SubResource("AtlasTexture_p4p8c")
 layout_mode = 2
 
 [node name="RetryButton" type="TextureButton" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/CenterContainer2"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_sksbt")
@@ -98,6 +100,7 @@ texture_pressed = SubResource("AtlasTexture_fsebb")
 layout_mode = 2
 
 [node name="PlayButton" type="TextureButton" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/CenterContainer3"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_804yk")

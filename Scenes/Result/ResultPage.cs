@@ -4,11 +4,11 @@ using System.Diagnostics;
 
 public partial class ResultPage: Control
 {
-    [Export]
-    float AtlasScale = 1280;
+	[Export]
+	float AtlasScale = 1280;
 
-    [Export]
-    Texture2D[] Stamps = new Texture2D[4];
+	[Export]
+	Texture2D[] Stamps = new Texture2D[4];
 
     
 
@@ -32,16 +32,24 @@ public partial class ResultPage: Control
 
         SetResult(0);
     }
+	public override void _Ready()
+	{
+		GetNode<TextureButton>("%StageSelectButton").ButtonUp += GetNode<SceneManager>("/root/SceneManager").StageSelect;
+		GetNode<TextureButton>("%RetryButton").ButtonUp += GetNode<SceneManager>("/root/SceneManager").Replay;
+		GetNode<TextureButton>("%PlayButton").ButtonUp += GetNode<SceneManager>("/root/SceneManager").NextStage;
+	}
 
-    public void SetResult(int grade)
-    {
-        TextureRect mayorTexture = GetNode<TextureRect>("%Mayor");
-        AtlasTexture mayorAtlasTexture = mayorTexture.Texture as AtlasTexture;
-        Debug.Assert(mayorAtlasTexture != null);
+	public void SetResult(int grade)
+	{
+		TextureRect mayorTexture = GetNode<TextureRect>("%Mayor");
+		AtlasTexture mayorAtlasTexture = mayorTexture.Texture as AtlasTexture;
+		Debug.Assert(mayorAtlasTexture != null);
 
-        mayorAtlasTexture.Region = new Rect2(AtlasScale * grade, 0, AtlasScale, AtlasScale);
+		mayorAtlasTexture.Region = new Rect2(AtlasScale * grade, 0, AtlasScale, AtlasScale);
 
-        TextureRect stamp = GetNode<TextureRect>("%Stamp");
-        stamp.Texture = Stamps[grade];
-    }
+		TextureRect stamp = GetNode<TextureRect>("%Stamp");
+		stamp.Texture = Stamps[grade];
+
+		GetNode<TextureButton>("%PlayButton").Visible = !GetNode<SceneManager>("/root/SceneManager").IsMaxStage();
+	}
 }

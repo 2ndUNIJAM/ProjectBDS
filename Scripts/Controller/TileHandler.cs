@@ -126,18 +126,21 @@ public partial class TileHandler : GodotObject
     static public void UpdateComboTile(Grid grid, List<List<Vector2I>> comboList)
     {
         GD.Print("Update Combo Tile");
+
+
+
         foreach (List<Vector2I> list in comboList)
         {
             int comboLen = list.Count;
             foreach (Vector2I item in list)
             {
                 int newAtlasCoordsX = 0;
-                if (comboLen == 3)
+                if (comboLen == 3 || comboLen == 4)
                 {
                     GD.Print("Update to Level 2");
                     newAtlasCoordsX = 1;
                 }
-                else if (comboLen == 5)
+                else if (comboLen >= 5)
                 {
                     GD.Print("Update to Level 3");
                     newAtlasCoordsX = 2;

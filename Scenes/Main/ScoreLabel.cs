@@ -7,7 +7,8 @@ public partial class ScoreLabel : Label
 	double speed = 0.1f;
 	int TargetScore;
 	double CurrentScore = 0;
-	GpuParticles2D particle;
+	GpuParticles2D Particle;
+	AudioStreamPlayer CoinSound;
 
 	public void SetTargetScore(int targetScore)
 	{
@@ -16,7 +17,8 @@ public partial class ScoreLabel : Label
 	
 	public override void _Ready()
 	{
-		particle = GetNode<GpuParticles2D>("vfx_starGetting");
+		Particle = GetNode<GpuParticles2D>("vfx_starGetting");
+		CoinSound = GetNode<AudioStreamPlayer>("CoinSound");
 	}
 
 	public override void _Process(double delta)
@@ -28,9 +30,10 @@ public partial class ScoreLabel : Label
 		else if (CurrentScore < TargetScore)
 		{
 			CurrentScore += delta * speed;
-			if(!particle.Emitting)
+			if(!Particle.Emitting)
 			{
-				particle.Restart();
+				Particle.Restart();
+				CoinSound.Play();
 			}
 		}
 		Text = $"{(int)CurrentScore}억원";

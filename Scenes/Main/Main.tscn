@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bmu0yx4fvuqpk"]
+[gd_scene load_steps=14 format=3 uid="uid://bmu0yx4fvuqpk"]
 
 [ext_resource type="PackedScene" uid="uid://bv12jevebwfge" path="res://Scenes/Main/Map.tscn" id="1_2mq06"]
 [ext_resource type="Texture2D" uid="uid://cofktos6xgtsw" path="res://Scenes/Main/bg_desk.png" id="1_fidjh"]
@@ -8,11 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://duhffdexnc71q" path="res://Scenes/Inventory/Inventory.tscn" id="5_66ouf"]
 [ext_resource type="Script" path="res://Scripts/View/GridEvaluator.cs" id="6_pp8jg"]
 [ext_resource type="Texture2D" uid="uid://d0e64kib72ive" path="res://Sprites/bg_main.png" id="7_sk7yl"]
+[ext_resource type="FontFile" uid="uid://cupgua3esm0ts" path="res://Font/DOSGothic.ttf" id="8_3x48k"]
+[ext_resource type="Script" path="res://Scenes/Main/ScoreLabel.cs" id="9_pvq1e"]
 [ext_resource type="Texture2D" uid="uid://1jfe0plnfv6y" path="res://Sprites/spr_bt_submit.png" id="9_vtj8w"]
 [ext_resource type="PackedScene" uid="uid://bsynjat4p2v62" path="res://Scenes/Result/Result.tscn" id="10_ot8bw"]
 [ext_resource type="Texture2D" uid="uid://detyygn24n8xl" path="res://Sprites/spr_bt_submit_pushed.png" id="10_vlekj"]
 
 [node name="Main" type="Node2D"]
+metadata/_edit_horizontal_guides_ = [-375.0]
 
 [node name="Backgrounds" type="Node2D" parent="."]
 
@@ -57,7 +60,7 @@ position = Vector2(812, 360)
 texture = ExtResource("7_sk7yl")
 
 [node name="TileMap" parent="." instance=ExtResource("1_2mq06")]
-position = Vector2(490, 105)
+position = Vector2(512, 128)
 layer_1/name = "OutlineLayer"
 layer_2/name = "Building"
 layer_2/z_index = 1
@@ -71,6 +74,7 @@ layer_6/tile_data = PackedInt32Array()
 position = Vector2(640, 360)
 
 [node name="State" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("2_b6ynt")
 JsonMapPath = "res://map.json"
 
@@ -86,16 +90,17 @@ script = ExtResource("6_pp8jg")
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="Score" type="Label" parent="HUD"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -295.0
-offset_top = 647.0
-offset_right = -154.0
+offset_left = 966.0
+offset_top = 652.0
+offset_right = 1071.0
 offset_bottom = 683.0
-grow_horizontal = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("8_3x48k")
+theme_override_font_sizes/font_size = 30
+text = "100억원"
+text_direction = 1
+script = ExtResource("9_pvq1e")
+speed = 50.0
 
 [node name="Result" parent="HUD" instance=ExtResource("10_ot8bw")]
 visible = false

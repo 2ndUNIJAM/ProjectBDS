@@ -33,6 +33,8 @@ public partial class InventoryItem : Control
 
 	public void OnItemClickHanndler()
 	{
+		AudioStreamPlayer player = GetNode<AudioStreamPlayer>("ButtonSfx");
+		player.Play();
 		GD.Print($"Select {Id} inventory Item");
 		EmitSignal(SignalName.OnItemClick, Id);
 	}

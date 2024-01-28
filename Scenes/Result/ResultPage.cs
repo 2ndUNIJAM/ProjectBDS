@@ -16,7 +16,7 @@ public partial class ResultPage: Control
     {
         SetResult(3);
 
-        Button submitButton = GetNode<Button>("../HUD/Submit");
+        Button submitButton = GetNode<Button>("../Submit");
         submitButton.Text = "SUBMIT";
         submitButton.Pressed += GameOver;
         //AddChild(submitButton);
@@ -25,9 +25,9 @@ public partial class ResultPage: Control
     void GameOver()
     {
         GD.Print("over here");
-        Control myInventory = GetNode<Control>("../HUD/Inventory");
+        Control myInventory = GetNode<Control>("../Inventory");
         myInventory.Visible = false;
-        Control myResult = GetNode<Control>("../HUD/Result");
+        Control myResult = GetNode<Control>("../Result");
         myResult.Visible = true;
 
         SetResult(0);
